@@ -33,6 +33,14 @@ Tant que `data-video` est vide, le site affiche un cadre « Vidéo à venir ».
 <button class="card reveal" type="button" data-video="https://youtu.be/XXXXXXXXXXX" data-preview="clips/projet1.mp4">
 ```
 
+## CV
+
+- `cv.html` : le CV (modifie le texte directement dans ce fichier).
+- Pour refaire le PDF : ouvre `cv.html?public` dans le navigateur, Ctrl + P, « Enregistrer au format PDF »,
+  marges « Aucune », puis remplace `assets/CV-Alexandre-Da-Silva.pdf`.
+- Le numéro de téléphone vient du fichier privé `private/telephone.js` : il reste sur ton ordi et n'est jamais publié.
+  Ouvre `cv.html` (sans `?public`) pour la version candidatures avec téléphone.
+
 ## Traduction anglaise
 
 Chaque texte a sa version anglaise juste à côté, dans `data-en="..."`.

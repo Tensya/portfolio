@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV — Alexandre Da Silva, monteur VFX</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <!--
+    CV d'Alexandre Da Silva.
+    - Pour le PDF : ouvrir cette page, Ctrl + P, « Enregistrer au format PDF », marges « Aucune ».
+    - Le numéro de téléphone n'apparaît que si le fichier privé private/telephone.js existe
+      (il reste sur l'ordinateur, il n'est jamais publié).
+  -->
+  <style>
+    :root {
+      --ink: #1f2229;
+      --muted: #5d6270;
+      --line: #d9dbe1;
+      --side: #2c2d33;
+      --side-text: #eceef2;
+      --side-muted: #a9adb8;
+      --violet: #6d3fd6;
+      --violet-light: #b69cff;
+    }
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body {
+      margin: 0;
+      background: #e9eaee;
+      color: var(--ink);
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 9.8pt;
+      line-height: 1.45;
+    }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: "Syne", sans-serif; margin: 0; text-transform: uppercase; }
+
+    .page {
+      display: grid;
+      grid-template-columns: 68mm 1fr;
+      width: 210mm;
+      height: 297mm;
+      margin: 10mm auto;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; box-shadow: none; }
+    }
+
+    /* ---------- colonne gauche ---------- */
+    .side {
+      padding: 14mm 8mm 10mm;
+      background: var(--side);
+      color: var(--side-text);
+    }
+    .photo {
+      display: block;
+      width: 40mm;
+      height: 40mm;
+      margin: 0 auto 10mm;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.2mm solid #fff;
+    }
+    .side h2 {
+      margin: 0 0 3.5mm;
+      padding-bottom: 2mm;
+      border-bottom: 0.3mm solid rgba(255, 255, 255, 0.35);
+      font-size: 12pt;
+      letter-spacing: 0.04em;
+    }
+    .side section + section { margin-top: 9mm; }
+    .contact { list-style: none; margin: 0; padding: 0; display: grid; gap: 3mm; }
+    .contact li { display: grid; grid-template-columns: 6mm 1fr; align-items: center; gap: 2.5mm; font-size: 7.9pt; overflow-wrap: anywhere; }
+    .contact li[hidden] { display: none; }
+    .ico {
+      display: grid; place-items: center;
+      width: 6mm; height: 6mm;
+      border-radius: 1.2mm;
+      background: var(--violet);
+    }
+    .ico svg { width: 3.4mm; height: 3.4mm; fill: #fff; }
+    .contact a { text-decoration: none; }
+    .edu + .edu { margin-top: 4mm; }
+    .edu .years { font-size: 7.8pt; font-weight: 700; color: var(--violet-light); }
+    .edu h3 { font-size: 9.5pt; line-height: 1.25; margin: 0.5mm 0; }
+    .edu p { margin: 0; font-style: italic; color: var(--side-muted); font-size: 8.3pt; }
+    .langs { list-style: none; margin: 0; padding: 0; display: grid; gap: 2mm; }
+    .langs li { display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+    .langs b {
+      padding: 0.4mm 2.2mm;
+      border-radius: 5mm;
+      background: rgba(182, 156, 255, 0.18);
+      color: var(--violet-light);
+      font-size: 7.8pt;
+    }
+    .interest + .interest { margin-top: 3mm; }
+    .interest h3 { font-family: "Inter", sans-serif; text-transform: none; font-size: 9pt; font-weight: 700; }
+    .interest p { margin: 0.5mm 0 0; color: var(--side-muted); font-size: 7.8pt; line-height: 1.4; }
+
+    /* ---------- colonne droite ---------- */
+    .main { padding: 14mm 12mm 10mm 11mm; display: flex; flex-direction: column; }
+    .head h1 { font-size: 25pt; font-weight: 800; letter-spacing: 0.06em; line-height: 1; }
+    .head .role {
+      margin: 4mm 0 0;
+      font-family: "Syne", sans-serif;
+      font-size: 12.5pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--violet);
+    }
+    .head .meta { margin: 1.5mm 0 0; color: var(--muted); font-size: 9pt; letter-spacing: 0.02em; }
+
+    .block { margin-top: 11mm; }
+    .block > h2 {
+      margin-bottom: 4mm;
+      padding-bottom: 1.8mm;
+      border-bottom: 0.4mm solid var(--ink);
+      font-size: 12.5pt;
+      letter-spacing: 0.03em;
+    }
+
+    .job { position: relative; padding-left: 5mm; }
+    .job + .job { margin-top: 7mm; }
+    .job::before {
+      /* point de la frise */
+      content: "";
+      position: absolute;
+      left: 0; top: 1.4mm;
+      width: 2mm; height: 2mm;
+      border-radius: 50%;
+      background: var(--violet);
+    }
+    .job::after {
+      content: "";
+      position: absolute;
+      left: 0.85mm; top: 4.5mm; bottom: -6.5mm;
+      width: 0.3mm;
+      background: var(--line);
+    }
+    .job:last-child::after { display: none; }
+    .job-top { display: flex; justify-content: space-between; gap: 4mm; align-items: baseline; }
+    .job h3 { font-size: 11pt; letter-spacing: 0.02em; }
+    .job .date { flex: none; font-size: 8pt; font-weight: 700; color: var(--violet); white-space: nowrap; }
+    .job .where { margin: 0.6mm 0 1.5mm; font-weight: 600; color: var(--muted); }
+    .job ul { margin: 0; padding-left: 4mm; }
+    .job li { margin: 0.6mm 0; }
+    .job li em { color: var(--muted); }
+    .more { display: inline-block; margin-top: 1.5mm; font-size: 8.2pt; font-weight: 700; color: var(--violet); text-decoration: underline; text-underline-offset: 0.6mm; }
+
+    .skills-line { margin: 0 0 5mm; }
+    .skills-line strong { font-weight: 700; }
+    .softs { display: flex; flex-wrap: wrap; gap: 2.6mm; margin: 0; padding: 0; list-style: none; }
+    .soft { display: grid; justify-items: center; gap: 1.2mm; width: 13.8mm; font-size: 7pt; color: var(--muted); text-align: center; line-height: 1.2; }
+    .logo {
+      display: grid; place-items: center;
+      width: 11.5mm; height: 11.5mm;
+      border-radius: 2.2mm;
+      font-family: system-ui, "Segoe UI", sans-serif;
+      font-size: 14.5pt; font-weight: 700;
+    }
+    .logo svg { width: 72%; height: 72%; }
+    .logo--adobe { background: #00005b; color: #9999ff; border: 0.4mm solid #9999ff; }
+    .logo--ps { background: #001e36; color: #31a8ff; border: 0.4mm solid #31a8ff; }
+    .logo--resolve { border: 0.5mm solid transparent; background: radial-gradient(circle at 50% 30%, #2b405c, #1b2a3d 75%) padding-box, conic-gradient(from -20deg, #1ec8ff, #5b7fd6, #b04f86, #ff4a3a, #ffa02e, #d6e62a, #3fd18a, #1ec8ff) border-box; }
+    .logo--resolve svg { width: 82%; height: 82%; }
+    .logo--nuke { background: #1a1a1a; border: 0.4mm solid #5a4418; }
+    .logo--nuke svg { width: 80%; height: 80%; }
+    .logo--blender { background: #1d2733; border: 0.4mm solid #34495e; }
+    .logo--comfy { background: #221a2b; border: 0.4mm solid #3d3050; }
+    .logo--comfy svg { width: 100%; height: 100%; }
+
+    .portfolio { margin-top: auto; display: flex; align-items: center; gap: 6mm; padding-top: 6mm; border-top: 0.4mm solid var(--ink); }
+    .portfolio img { width: 28mm; height: 28mm; }
+    .portfolio h2 { font-size: 12.5pt; letter-spacing: 0.03em; }
+    .portfolio p { margin: 1.5mm 0 0; color: var(--muted); }
+    .portfolio a { display: inline-block; margin-top: 2mm; font-size: 10.5pt; font-weight: 700; color: var(--violet); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ========== COLONNE GAUCHE ========== -->
+    <aside class="side">
+      <img class="photo" src="assets/photo-cv.jpg" alt="Alexandre Da Silva">
+
+      <section>
+        <h2>Contact</h2>
+        <ul class="contact">
+          <li data-phone hidden>
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></span>
+            <span class="phone-num"></span>
+          </li>
+          <li>
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg></span>
+            <a href="mailto:alexandre.correiadasilva@eicar.fr">alexandre.correiadasilva<wbr>@eicar.fr</a>
+          </li>
+          <li>
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.84-2.05 3.78-2.05 4.04 0 4.79 2.66 4.79 6.12V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4z"/></svg></span>
+            <a href="https://www.linkedin.com/in/alexandre-correia-da-silva-1749001b8/">linkedin.com/in/alexandre-correia-da-silva</a>
+          </li>
+          <li>
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8 8 0 0 1 18.9 8zM12 4.04A14 14 0 0 1 13.9 8h-3.8A14 14 0 0 1 12 4.04zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4zm.84 2h2.95a15.7 15.7 0 0 0 1.38 3.56A8 8 0 0 1 5.1 16zm2.95-8H5.1a8 8 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.05 8zM12 19.96A14 14 0 0 1 10.1 16h3.8A14 14 0 0 1 12 19.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.25 5.56A15.7 15.7 0 0 0 15.95 16h2.95a8 8 0 0 1-4.31 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4z"/></svg></span>
+            <a href="https://alexdasvfx.github.io">alexdasvfx.github.io</a>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Formation</h2>
+        <div class="edu">
+          <span class="years">2025 – 2028</span>
+          <h3>Bachelor Montage VFX</h3>
+          <p>EICAR, Paris</p>
+        </div>
+        <div class="edu">
+          <span class="years">2018</span>
+          <h3>Baccalauréat SEN</h3>
+          <p>Lycée Alfred Hutinel, Cannes</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Langues</h2>
+        <ul class="langs">
+          <li>Anglais <b>C1</b></li>
+          <li>Portugais <b>C1</b></li>
+          <li>Espagnol <b>A2</b></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Intérêts</h2>
+        <div class="interest">
+          <h3>Voyages</h3>
+          <p>Passionné par l'exploration et la nouveauté, toujours en quête d'aventures enrichissantes.</p>
+        </div>
+        <div class="interest">
+          <h3>Cinéma &amp; Montage</h3>
+          <p>Création de formats courts, montages dynamiques, travail sur le rythme, effets visuels.</p>
+        </div>
+        <div class="interest">
+          <h3>Jeux vidéo</h3>
+          <p>Sessions de jeu, tests de nouveautés pour des projets personnels, analyse de mécaniques.</p>
+        </div>
+      </section>
+    </aside>
+
+    <!-- ========== COLONNE DROITE ========== -->
+    <main class="main">
+      <header class="head">
+        <h1>Alexandre Da Silva</h1>
+        <p class="role">Stage &amp; alternance · Monteur VFX</p>
+        <p class="meta">Disponible dès juin 2027 · 26 ans</p>
+      </header>
+
+      <section class="block">
+        <h2>Expérience</h2>
+
+        <div class="job">
+          <div class="job-top">
+            <h3>Monteur vidéo — Stage</h3>
+            <span class="date">Mai 2026</span>
+          </div>
+          <p class="where">Box Office &amp; Cult News · Festival de Cannes</p>
+          <ul>
+            <li>Montage d'interviews</li>
+            <li>Montage de captations de conférences avec synthés</li>
+            <li>Montage de reels Instagram</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top">
+            <h3>Monteur vidéo &amp; étalonneur</h3>
+            <span class="date">2025 – 2026</span>
+          </div>
+          <p class="where">Courts-métrages étudiants · EICAR</p>
+          <ul>
+            <li><em>Sans frontières</em> (janvier 2026)</li>
+            <li><em>J'y réfléchis, c'est tout</em> (janvier 2026)</li>
+            <li><em>Frère et Sœur</em> (décembre 2025)</li>
+          </ul>
+          <a class="more" href="https://alexdasvfx.github.io/courts-metrages.html">Voir les courts-métrages →</a>
+        </div>
+
+        <div class="job">
+          <div class="job-top">
+            <h3>Valet d'étages, hôtels 5 étoiles</h3>
+            <span class="date">2023 – 2025</span>
+          </div>
+          <p class="where">Carlton, Cannes · Five Seas Hotel, Cannes</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Compétences</h2>
+        <p class="skills-line"><strong>Montage :</strong> étalonnage, dérushage, VFX, synchro, habillage, mixage</p>
+        <ul class="softs">
+          <li class="soft"><span class="logo logo--adobe">Pr</span>Premiere Pro</li>
+          <li class="soft"><span class="logo logo--adobe">Ae</span>After Effects</li>
+          <li class="soft"><span class="logo logo--ps">Ps</span>Photoshop</li>
+          <li class="soft">
+            <span class="logo logo--resolve">
+              <svg viewBox="17 14 66 64">
+                <defs>
+                  <radialGradient id="rv-c" cx="0.35" cy="0.3" r="0.85"><stop offset="0" stop-color="#c8fcff"/><stop offset="0.5" stop-color="#2fd6ff"/><stop offset="1" stop-color="#2a8fe0"/></radialGradient>
+                  <radialGradient id="rv-y" cx="0.35" cy="0.3" r="0.85"><stop offset="0" stop-color="#faffc0"/><stop offset="0.5" stop-color="#d7ec2c"/><stop offset="1" stop-color="#9cc81a"/></radialGradient>
+                  <radialGradient id="rv-r" cx="0.35" cy="0.3" r="0.85"><stop offset="0" stop-color="#ffd0d6"/><stop offset="0.5" stop-color="#ff5064"/><stop offset="1" stop-color="#f0602e"/></radialGradient>
+                </defs>
+                <path fill="url(#rv-c)" d="M50 47C45 41 38 38 38 30A12 12 0 1 1 62 30C62 38 55 41 50 47Z"/>
+                <path fill="url(#rv-r)" d="M52.6 51.5C60.29 50.17 66.39 45.61 73.32 49.61A12 12 0 1 1 61.32 70.39C54.39 66.39 55.29 58.83 52.6 51.5Z"/>
+                <path fill="url(#rv-y)" d="M47.4 51.5C44.71 58.83 45.61 66.39 38.68 70.39A12 12 0 1 1 26.68 49.61C33.61 45.61 39.71 50.17 47.4 51.5Z"/>
+              </svg>
+            </span>DaVinci Resolve
+          </li>
+          <li class="soft">
+            <span class="logo logo--nuke">
+              <svg viewBox="100 100 1000 1000">
+                <circle cx="600" cy="600" r="500" fill="#f8b425"/>
+                <circle cx="600" cy="600" r="450" fill="#222"/>
+                <path fill="#f8b425" d="M245 500H505Q540 500 560 522L668 640Q675 648 675 660V960Q677 992 705 985A400 400 0 0 0 955 780Q962 768 945 757L838 638Q825 622 825 600V520Q828 500 848 500H965Q985 498 980 478A400 400 0 0 0 730 220Q716 218 715 232L707 355Q705 375 690 375H615Q593 375 578 358L462 242Q450 230 438 236A400 400 0 0 0 222 468Q218 500 245 500Z"/>
+                <ellipse cx="700" cy="500" rx="82" ry="55" transform="rotate(40 700 500)" fill="#222"/>
+              </svg>
+            </span>Nuke
+          </li>
+          <li class="soft">
+            <span class="logo logo--blender">
+              <svg viewBox="0 0 40 40">
+                <path d="M6 15h13M9 21h11M16 27l-8 6" stroke="#f5792a" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="24" cy="23" r="10" fill="#f5792a"/>
+                <circle cx="24" cy="23" r="6.5" fill="#fff"/>
+                <circle cx="24" cy="23" r="4" fill="#265787"/>
+              </svg>
+            </span>Blender
+          </li>
+          <li class="soft">
+            <span class="logo logo--comfy">
+              <svg viewBox="30 30 140 140"><path fill="#f0ff41" d="M86 45H151Q158 45 155 52L146 70Q143 75 138 75H106L90 124H130Q137 124 134 131L125 151Q122 157 116 157H66Q59 157 62 150L69 132H56Q49 132 52 125L77 52Q79 45 86 45Z"/></svg>
+            </span>ComfyUI
+          </li>
+        </ul>
+      </section>
+
+      <section class="portfolio">
+        <img src="assets/qr-portfolio.svg" alt="QR code vers le portfolio">
+        <div>
+          <h2>Portfolio</h2>
+          <p>Mes projets de montage et de VFX :</p>
+          <a href="https://alexdasvfx.github.io">alexdasvfx.github.io →</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Numéro de téléphone : seulement si le fichier privé existe (jamais publié).
+       cv.html?public force la version sans téléphone, même sur l'ordinateur. -->
+  <script>
+    if (!new URLSearchParams(location.search).has("public")) {
+      const s = document.createElement("script");
+      s.src = "private/telephone.js";
+      s.onerror = () => s.remove();
+      document.body.appendChild(s);
+    }
+  </script>
+</body>
+</html>
