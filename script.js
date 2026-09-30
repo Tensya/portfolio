@@ -48,7 +48,7 @@ const EMPTY_SLOT = `
   <span class="video__empty">
     <span class="video__rec">REC</span>
     <span class="video__play">${PLAY_ICON}</span>
-    <span class="video__label">Vidéo à venir</span>
+    <span class="video__label" data-en="Coming soon">Vidéo à venir</span>
   </span>`;
 
 const lightbox = document.querySelector(".lightbox");
@@ -124,12 +124,41 @@ function showToast(text) {
 document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
   link.addEventListener("click", () => {
     const email = link.getAttribute("href").replace("mailto:", "");
+    const copied = document.documentElement.lang === "en" ? "Email copied:" : "Adresse copiée :";
     navigator.clipboard?.writeText(email).then(
-      () => showToast(`Adresse copiée : ${email}`),
+      () => showToast(`${copied} ${email}`),
       () => showToast(email)
     );
   });
 });
+
+// =========================================================
+// Langue FR / EN
+// Chaque texte traduit porte sa version anglaise dans data-en="...".
+// Le choix est retenu ; par défaut : français si le navigateur est en français.
+// =========================================================
+
+const langButtons = document.querySelectorAll(".lang-switch button");
+
+function applyLang(lang) {
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-en]").forEach((el) => {
+    if (el.dataset.fr === undefined) el.dataset.fr = el.innerHTML;
+    el.innerHTML = lang === "en" ? el.dataset.en : el.dataset.fr;
+  });
+  langButtons.forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+}
+
+let savedLang = null;
+try { savedLang = localStorage.getItem("lang"); } catch {}
+applyLang(savedLang || (navigator.language?.startsWith("fr") ? "fr" : "en"));
+
+langButtons.forEach((b) =>
+  b.addEventListener("click", () => {
+    applyLang(b.dataset.lang);
+    try { localStorage.setItem("lang", b.dataset.lang); } catch {}
+  })
+);
 
 // =========================================================
 // Apparition au scroll (avec un léger décalage dans les grilles)

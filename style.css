@@ -186,6 +186,29 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 .nav__links a { color: var(--muted); transition: color 0.2s; }
 .nav__links a:hover, .nav__links a[aria-current="page"] { color: var(--text); }
 .nav__links a[aria-current="page"] { text-decoration: underline 1px var(--violet); text-underline-offset: 6px; }
+/* sélecteur de langue FR | EN */
+.lang-switch {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.lang-switch button {
+  padding: 5px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.lang-switch button:hover { color: var(--text); }
+.lang-switch button[aria-pressed="true"] { color: #fff; background: var(--violet); }
 .nav__links .nav__cta {
   color: var(--text);
   padding: 8px 18px;
@@ -978,6 +1001,7 @@ main > section, main > .marquee { position: relative; z-index: 1; }
   margin-bottom: 32px;
 }
 .langs { margin-top: 40px; }
+html:not([lang="en"]) .only-en { display: none; } /* affiché seulement en anglais */
 .about__body .langs .label { margin: 0; font-size: 0.75rem; color: var(--violet-light); }
 .langs__list {
   display: flex;
@@ -1039,6 +1063,7 @@ main > section, main > .marquee { position: relative; z-index: 1; }
   margin: 28px auto 0;
   color: var(--muted);
   font-size: clamp(1rem, 2vw, 1.15rem);
+  text-wrap: balance; /* lignes équilibrées : pas de mot seul sur la dernière ligne */
 }
 .contact__dispo strong { color: var(--text); font-weight: 700; }
 .contact__mail {
@@ -1108,6 +1133,8 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 }
 @media (max-width: 700px) {
   .nav__links a:not(.nav__cta) { display: none; }
+  .nav__links { gap: 10px; }
+  .lang-switch button { padding: 5px 9px; }
   .works { grid-template-columns: 1fr; }
   .hero__orb { right: -30vw; width: 110vw; opacity: 0.55; }
   .float { zoom: 0.7; }
