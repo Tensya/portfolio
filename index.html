@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>iskandar.das — Monteur · VFX · Étalonnage</title>
-  <meta name="description" content="Portfolio d'Alexandre Correia da Silva (iskandar.das) : montage, VFX, motion design et étalonnage. Étudiant Bachelor MVFX à l'EICAR Paris, à la recherche d'un stage.">
-  <meta property="og:title" content="iskandar.das — Monteur · VFX · Étalonnage">
-  <meta property="og:description" content="Montage, VFX, motion design et étalonnage. Étudiant MVFX à l'EICAR Paris.">
+  <title>Alexandre Da Silva (Alex.Das) — Monteur vidéo &amp; VFX</title>
+  <meta name="description" content="Portfolio d'Alexandre Correia Da Silva, monteur vidéo et VFX. Étudiant en Bachelor Montage & VFX à l'EICAR Paris. Recherche un stage (été 2027) et une alternance (2027-2028).">
+  <meta property="og:title" content="Alexandre Da Silva — Monteur vidéo & VFX">
+  <meta property="og:description" content="Montage et VFX. Étudiant en Bachelor Montage & VFX à l'EICAR Paris.">
   <meta name="theme-color" content="#050507">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,19 +16,52 @@
 <body>
 
   <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"></div>
+
+  <!-- Formes réutilisées : étoile 4 branches + dégradé chrome -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="g-chrome" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset="0.45" stop-color="#8a8f9a"/>
+        <stop offset="0.6" stop-color="#f4f5f8"/>
+        <stop offset="1" stop-color="#6b7078"/>
+      </linearGradient>
+      <linearGradient id="g-violet" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e2d6ff"/>
+        <stop offset="0.5" stop-color="#8b5cf6"/>
+        <stop offset="1" stop-color="#4c1d95"/>
+      </linearGradient>
+      <symbol id="star" viewBox="0 0 100 100">
+        <path d="M50 0C53 35 65 47 100 50C65 53 53 65 50 100C47 65 35 53 0 50C35 47 47 35 50 0Z"/>
+      </symbol>
+    </defs>
+  </svg>
 
   <!-- ============ NAVIGATION ============ -->
   <header class="nav">
-    <a href="#top" class="nav__logo">iskandar<span>.das</span></a>
+    <a href="index.html" class="nav__logo">Alex<span>.Das</span></a>
     <nav class="nav__links">
-      <a href="#projets">Projets</a>
-      <a href="#expertise">Expertise</a>
+      <a href="projets.html">Projets</a>
+      <a href="courts-metrages.html">Courts-métrages</a>
+      <a href="#savoir-faire">Savoir-faire</a>
       <a href="#about">À propos</a>
       <a href="#contact" class="nav__cta">Contact</a>
     </nav>
   </header>
 
   <main id="top">
+
+    <!-- étoiles flottantes : data-speed = vitesse de parallaxe (négatif = monte) -->
+    <div class="floaters" aria-hidden="true">
+      <span class="float" data-speed="-0.12" style="top:9%;left:1.5%;width:26px;height:26px"><svg><use href="#star" fill="url(#g-chrome)"/></svg></span>
+      <span class="float" data-speed="0.08" style="top:24%;left:95%;width:40px;height:40px"><svg><use href="#star" fill="url(#g-violet)"/></svg></span>
+      <span class="float" data-speed="-0.2" style="top:36%;left:1.5%;width:18px;height:18px"><svg><use href="#star" fill="url(#g-violet)"/></svg></span>
+      <span class="float" data-speed="0.15" style="top:47%;left:96%;width:30px;height:30px"><svg><use href="#star" fill="url(#g-chrome)"/></svg></span>
+      <span class="float" data-speed="-0.1" style="top:58%;left:2%;width:34px;height:34px"><svg><use href="#star" fill="url(#g-chrome)"/></svg></span>
+      <span class="float" data-speed="0.18" style="top:70%;left:95%;width:22px;height:22px"><svg><use href="#star" fill="url(#g-violet)"/></svg></span>
+      <span class="float" data-speed="-0.14" style="top:86%;left:94%;width:28px;height:28px"><svg><use href="#star" fill="url(#g-chrome)"/></svg></span>
+    </div>
 
     <!-- ============ HERO ============ -->
     <section class="hero">
@@ -38,20 +71,20 @@
       </div>
 
       <div class="hero__content">
-        <p class="hero__tag"><span class="dot"></span> Disponible pour un stage</p>
-        <h1 class="hero__title chrome">iskandar<span class="violet">.</span>das</h1>
-        <p class="hero__roles">Montage <i>✦</i> VFX <i>✦</i> Motion design <i>✦</i> Étalonnage</p>
+        <p class="hero__tag"><span class="dot"></span> Stage été 2027 · Alternance 2027-2028</p>
+        <h1 class="hero__title chrome">Alex<span class="violet">.</span>Das</h1>
+        <p class="hero__name">Alexandre Da Silva</p>
+        <p class="hero__roles">Montage <i>✦</i> VFX</p>
         <p class="hero__lead">
-          Je raconte des histoires au rythme de la coupe.
-          Étudiant en Bachelor Montage &amp; VFX à l'EICAR Paris.
+          Monteur vidéo et VFX artist, étudiant en Bachelor Montage &amp; VFX à l'EICAR Paris.
         </p>
         <div class="hero__actions">
-          <a href="#projets" class="btn btn--chrome">Voir mes projets</a>
+          <a href="#travaux" class="btn btn--chrome">Voir mes projets</a>
           <a href="#contact" class="btn btn--ghost">Me contacter</a>
         </div>
       </div>
 
-      <a href="#projets" class="hero__scroll" aria-label="Défiler vers les projets">
+      <a href="#travaux" class="hero__scroll" aria-label="Défiler vers les projets">
         <span></span>
       </a>
     </section>
@@ -59,109 +92,165 @@
     <!-- ============ BANDEAU ============ -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span>MONTAGE</span><i>✦</i><span>VFX</span><i>✦</i><span>ÉTALONNAGE</span><i>✦</i><span>MOTION DESIGN</span><i>✦</i><span>COMPOSITING</span><i>✦</i>
-        <span>MONTAGE</span><i>✦</i><span>VFX</span><i>✦</i><span>ÉTALONNAGE</span><i>✦</i><span>MOTION DESIGN</span><i>✦</i><span>COMPOSITING</span><i>✦</i>
+        <span>MONTAGE</span><i>✦</i><span>VFX</span><i>✦</i><span>DÉRUSHAGE</span><i>✦</i><span>SYNCHRO</span><i>✦</i><span>HABILLAGE</span><i>✦</i><span>ÉTALONNAGE</span><i>✦</i><span>MIXAGE</span><i>✦</i>
+        <span>MONTAGE</span><i>✦</i><span>VFX</span><i>✦</i><span>DÉRUSHAGE</span><i>✦</i><span>SYNCHRO</span><i>✦</i><span>HABILLAGE</span><i>✦</i><span>ÉTALONNAGE</span><i>✦</i><span>MIXAGE</span><i>✦</i>
       </div>
     </div>
 
-    <!-- ============ PROJETS ============
-         Pour ajouter une vidéo : colle le lien Vimeo ou YouTube dans data-video="".
-         Exemple : data-video="https://vimeo.com/123456789"
+    <!-- ============ TRAVAUX : 2 catégories ============
+         Pour mettre une image de fond sur une tuile, ajoute par exemple :
+         style="--cover: url(images/projets.jpg)" sur la balise <a class="tile ...">
     -->
-    <section id="projets" class="section">
+    <section id="travaux" class="section">
       <div class="section__head reveal">
-        <p class="eyebrow">01 — Projets</p>
-        <h2 class="chrome">Sélection</h2>
+        <p class="eyebrow">01 — Travaux</p>
+        <h2 class="chrome">Mes projets</h2>
       </div>
 
-      <div class="projects">
-
-        <article class="project project--wide reveal">
-          <div class="video" data-video=""></div>
-          <div class="project__info">
-            <p class="project__meta">Court-métrage · EICAR</p>
-            <h3>Sans frontières</h3>
-            <p class="project__role"><span>Montage</span><span>Étalonnage</span></p>
-          </div>
-        </article>
-
-        <article class="project reveal">
-          <div class="video" data-video=""></div>
-          <div class="project__info">
-            <p class="project__meta">Court-métrage · EICAR</p>
-            <h3>J'y réfléchis, c'est tout</h3>
-            <p class="project__role"><span>Montage</span><span>Étalonnage</span></p>
-          </div>
-        </article>
-
-        <article class="project reveal">
-          <div class="video" data-video=""></div>
-          <div class="project__info">
-            <p class="project__meta">Court-métrage · EICAR</p>
-            <h3>Frère et Sœur</h3>
-            <p class="project__role"><span>Montage</span><span>Étalonnage</span></p>
-          </div>
-        </article>
-
-        <article class="project reveal">
-          <div class="video" data-video=""></div>
-          <div class="project__info">
-            <p class="project__meta">Montage dynamique</p>
-            <h3>Glossy Cuts</h3>
-            <p class="project__role"><span>Montage</span><span>Motion</span><span>VFX</span></p>
-            <p class="project__desc">Montages au style glossy, coupés sur le beat.</p>
-          </div>
-        </article>
-
-        <article class="project reveal">
-          <div class="video" data-video=""></div>
-          <div class="project__info">
-            <p class="project__meta">Identité visuelle · Motion</p>
-            <h3>FC Somaek</h3>
-            <p class="project__role"><span>Motion design</span><span>Direction artistique</span></p>
-            <p class="project__desc">Identité d'un club de foot fictif : logo, affiches et annonces de joueurs animées, en noir et rouge.</p>
-          </div>
-        </article>
-
+      <div class="works">
+        <a class="tile tile--projets reveal" href="projets.html">
+          <span class="tile__bg"></span>
+          <span class="tile__veil"></span>
+          <span class="tile__cta" aria-hidden="true">→</span>
+          <span class="tile__content">
+            <span class="tile__num">01</span>
+            <span class="tile__title">Projets</span>
+            <span class="tile__sub">Edits · VFX · Motion</span>
+          </span>
+        </a>
+        <a class="tile tile--films reveal" href="courts-metrages.html">
+          <span class="tile__bg"></span>
+          <span class="tile__veil"></span>
+          <span class="tile__cta" aria-hidden="true">→</span>
+          <span class="tile__content">
+            <span class="tile__num">02</span>
+            <span class="tile__title">Courts-métrages</span>
+            <span class="tile__sub">Films étudiants · EICAR</span>
+          </span>
+        </a>
       </div>
     </section>
 
-    <!-- ============ EXPERTISE ============ -->
-    <section id="expertise" class="section">
+    <!-- ============ SAVOIR-FAIRE ============ -->
+    <section id="savoir-faire" class="section">
       <div class="section__head reveal">
-        <p class="eyebrow">02 — Expertise</p>
+        <p class="eyebrow">02 — Savoir-faire</p>
         <h2 class="chrome">Ce que je fais</h2>
       </div>
 
       <div class="skills">
         <div class="skill reveal">
-          <span class="skill__num">01</span>
+          <div class="skill__top">
+            <span class="skill__num">01</span>
+            <span class="ico ico--cut" aria-hidden="true"><span></span><span></span><span></span><i></i></span>
+          </div>
           <h3>Montage</h3>
-          <p>Rythme, narration, structure. Du court-métrage au montage dynamique cut sur le beat.</p>
+          <p>Dérushage, synchro, rythme et narration : du court-métrage au montage dynamique.</p>
         </div>
         <div class="skill reveal">
-          <span class="skill__num">02</span>
+          <div class="skill__top">
+            <span class="skill__num">02</span>
+            <span class="ico ico--vfx" aria-hidden="true">
+              <svg viewBox="0 0 100 100"><use href="#star" fill="url(#g-chrome)"/></svg>
+              <svg viewBox="0 0 100 100"><use href="#star" fill="url(#g-violet)"/></svg>
+            </span>
+          </div>
           <h3>VFX</h3>
-          <p>Compositing, effets et retouches pour intégrer l'impossible dans l'image.</p>
+          <p>Effets visuels, habillage et retouches pour enrichir l'image.</p>
         </div>
         <div class="skill reveal">
-          <span class="skill__num">03</span>
+          <div class="skill__top">
+            <span class="skill__num">03</span>
+            <span class="ico ico--grade" aria-hidden="true"></span>
+          </div>
           <h3>Étalonnage</h3>
           <p>Construire une ambiance et une cohérence colorimétrique au service du récit.</p>
         </div>
         <div class="skill reveal">
-          <span class="skill__num">04</span>
+          <div class="skill__top">
+            <span class="skill__num">04</span>
+            <span class="ico ico--motion" aria-hidden="true"><span></span></span>
+          </div>
           <h3>Motion design</h3>
-          <p>Titres, habillages et animations graphiques au rendu glossy et cinématographique.</p>
+          <p>Titres, habillages et animations graphiques pour la vidéo.</p>
         </div>
       </div>
 
-      <ul class="tools reveal" aria-label="Logiciels">
-        <li>Premiere Pro</li>
-        <li>After Effects</li>
-        <li>DaVinci Resolve</li>
-        <li>Photoshop</li>
-      </ul>
+      <!-- Timeline façon logiciel de montage : la tête de lecture défile sur chaque étape -->
+      <div class="timeline reveal">
+        <p class="label timeline__label">Du rush à l'export</p>
+        <div class="timeline__track">
+          <span class="timeline__playhead" aria-hidden="true"></span>
+          <div class="clip"><span class="clip__num">01</span><span class="clip__name">Dérushage</span></div>
+          <div class="clip"><span class="clip__num">02</span><span class="clip__name">Synchro</span></div>
+          <div class="clip"><span class="clip__num">03</span><span class="clip__name">Montage</span></div>
+          <div class="clip"><span class="clip__num">04</span><span class="clip__name">VFX &amp; habillage</span></div>
+          <div class="clip"><span class="clip__num">05</span><span class="clip__name">Étalonnage</span></div>
+          <div class="clip"><span class="clip__num">06</span><span class="clip__name">Mixage &amp; export</span></div>
+        </div>
+      </div>
+
+      <div class="softs__wrap reveal">
+        <p class="label">Logiciels</p>
+        <ul class="softs">
+          <li class="soft"><span class="soft__logo soft__logo--adobe" aria-hidden="true">Pr</span>Premiere Pro</li>
+          <li class="soft"><span class="soft__logo soft__logo--adobe" aria-hidden="true">Ae</span>After Effects</li>
+          <li class="soft"><span class="soft__logo soft__logo--ps" aria-hidden="true">Ps</span>Photoshop</li>
+          <li class="soft">
+            <span class="soft__logo soft__logo--resolve" aria-hidden="true">
+              <!-- icône DaVinci Resolve, redessinée : 3 gouttes qui pointent vers le centre -->
+              <svg viewBox="17 14 66 64">
+                <defs>
+                  <radialGradient id="rv-c" cx="0.35" cy="0.3" r="0.85">
+                    <stop offset="0" stop-color="#c8fcff"/><stop offset="0.5" stop-color="#2fd6ff"/><stop offset="1" stop-color="#2a8fe0"/>
+                  </radialGradient>
+                  <radialGradient id="rv-y" cx="0.35" cy="0.3" r="0.85">
+                    <stop offset="0" stop-color="#faffc0"/><stop offset="0.5" stop-color="#d7ec2c"/><stop offset="1" stop-color="#9cc81a"/>
+                  </radialGradient>
+                  <radialGradient id="rv-r" cx="0.35" cy="0.3" r="0.85">
+                    <stop offset="0" stop-color="#ffd0d6"/><stop offset="0.5" stop-color="#ff5064"/><stop offset="1" stop-color="#f0602e"/>
+                  </radialGradient>
+                </defs>
+                <!-- haut (cyan) -->
+                <path fill="url(#rv-c)" d="M50 47C45 41 38 38 38 30A12 12 0 1 1 62 30C62 38 55 41 50 47Z"/>
+                <!-- bas droite (rouge) -->
+                <path fill="url(#rv-r)" d="M52.6 51.5C60.29 50.17 66.39 45.61 73.32 49.61A12 12 0 1 1 61.32 70.39C54.39 66.39 55.29 58.83 52.6 51.5Z"/>
+                <!-- bas gauche (jaune-vert) -->
+                <path fill="url(#rv-y)" d="M47.4 51.5C44.71 58.83 45.61 66.39 38.68 70.39A12 12 0 1 1 26.68 49.61C33.61 45.61 39.71 50.17 47.4 51.5Z"/>
+              </svg>
+            </span>DaVinci Resolve
+          </li>
+          <li class="soft">
+            <span class="soft__logo soft__logo--nuke" aria-hidden="true">
+              <!-- icône Nuke (Foundry), redessinée -->
+              <svg viewBox="100 100 1000 1000">
+                <circle cx="600" cy="600" r="500" fill="#f8b425"/>
+                <circle cx="600" cy="600" r="450" fill="#222"/>
+                <path fill="#f8b425" d="M245 500H505Q540 500 560 522L668 640Q675 648 675 660V960Q677 992 705 985A400 400 0 0 0 955 780Q962 768 945 757L838 638Q825 622 825 600V520Q828 500 848 500H965Q985 498 980 478A400 400 0 0 0 730 220Q716 218 715 232L707 355Q705 375 690 375H615Q593 375 578 358L462 242Q450 230 438 236A400 400 0 0 0 222 468Q218 500 245 500Z"/>
+                <ellipse cx="700" cy="500" rx="82" ry="55" transform="rotate(40 700 500)" fill="#222"/>
+              </svg>
+            </span>Nuke
+          </li>
+          <li class="soft">
+            <span class="soft__logo soft__logo--blender" aria-hidden="true">
+              <svg viewBox="0 0 40 40">
+                <path d="M6 15h13M9 21h11M16 27l-8 6" stroke="#f5792a" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="24" cy="23" r="10" fill="#f5792a"/>
+                <circle cx="24" cy="23" r="6.5" fill="#fff"/>
+                <circle cx="24" cy="23" r="4" fill="#265787"/>
+              </svg>
+            </span>Blender
+          </li>
+          <li class="soft">
+            <span class="soft__logo soft__logo--comfy" aria-hidden="true">
+              <!-- icône ComfyUI, redessinée : « C » italique en blocs -->
+              <svg viewBox="30 30 140 140">
+                <path fill="#f0ff41" d="M86 45H151Q158 45 155 52L146 70Q143 75 138 75H106L90 124H130Q137 124 134 131L125 151Q122 157 116 157H66Q59 157 62 150L69 132H56Q49 132 52 125L77 52Q79 45 86 45Z"/>
+              </svg>
+            </span>ComfyUI
+          </li>
+        </ul>
+      </div>
     </section>
 
     <!-- ============ À PROPOS ============ -->
@@ -172,18 +261,20 @@
       </div>
       <div class="about__body reveal">
         <p class="about__big">
-          Je suis <strong>Alexandre Correia da Silva</strong>, alias <span class="violet">iskandar.das</span> :
-          monteur, VFX artist, motion designer et étalonneur.
+          Je m'appelle <strong>Alexandre Correia Da Silva</strong>, monteur VFX.
         </p>
         <p>
-          Étudiant en <strong>Bachelor Montage &amp; VFX (MVFX)</strong> à l'EICAR Paris, je travaille sur des
-          courts-métrages en tant que monteur et étalonneur, et je développe en parallèle un univers
-          visuel sombre, chromé et cinématographique.
+          Je suis en <strong>Bachelor Montage &amp; VFX</strong> à l'EICAR Paris (2025-2028).
+          Courts-métrages, projets personnels : je travaille sur des formats variés, en montage comme en VFX.
         </p>
-        <p>
-          Je recherche un <strong>stage</strong> en montage, VFX ou post-production pour mettre
-          mes compétences au service de vrais projets et apprendre auprès de professionnels.
-        </p>
+        <div class="langs">
+          <p class="label">Langues</p>
+          <ul class="langs__list">
+            <li>Anglais <b>C1</b></li>
+            <li>Portugais <b>C1</b></li>
+            <li>Espagnol <b>A2</b></li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -192,6 +283,10 @@
       <div class="contact__glow" aria-hidden="true"></div>
       <p class="eyebrow reveal">04 — Contact</p>
       <h2 class="contact__title chrome reveal">Travaillons<br>ensemble.</h2>
+      <p class="contact__dispo reveal">
+        Je recherche un <strong>stage d'été de 1 à 2 mois</strong> (juin – août 2027) et une
+        <strong>alternance à partir de septembre 2027</strong>, en montage / VFX.
+      </p>
       <a class="contact__mail reveal" href="mailto:alexandre.correiadasilva@eicar.fr">alexandre.correiadasilva@eicar.fr</a>
       <div class="contact__links reveal">
         <a class="btn btn--chrome" href="https://www.linkedin.com/in/alexandre-correia-da-silva-1749001b8/" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -202,8 +297,8 @@
   </main>
 
   <footer class="footer">
-    <span>© <span id="year">2026</span> iskandar.das</span>
-    <span>Montage · VFX · Étalonnage — Paris</span>
+    <span>© <span id="year">2026</span> Alexandre Da Silva</span>
+    <span>Montage · VFX — Paris</span>
   </footer>
 
   <script src="script.js"></script>
