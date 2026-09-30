@@ -104,6 +104,34 @@ if (lightbox) {
 }
 
 // =========================================================
+// Liens e-mail : beaucoup d'ordinateurs n'ont pas de logiciel de mail
+// configuré, donc on copie aussi l'adresse et on l'affiche dans un message.
+// =========================================================
+
+const toast = document.createElement("div");
+toast.className = "toast";
+toast.setAttribute("role", "status");
+document.body.appendChild(toast);
+let toastTimer;
+
+function showToast(text) {
+  toast.textContent = text;
+  toast.classList.add("is-shown");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("is-shown"), 3500);
+}
+
+document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+  link.addEventListener("click", () => {
+    const email = link.getAttribute("href").replace("mailto:", "");
+    navigator.clipboard?.writeText(email).then(
+      () => showToast(`Adresse copiée : ${email}`),
+      () => showToast(email)
+    );
+  });
+});
+
+// =========================================================
 // Apparition au scroll (avec un léger décalage dans les grilles)
 // =========================================================
 

@@ -1053,6 +1053,29 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 .contact__mail:hover { color: var(--violet-light); }
 .contact__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
 
+/* ---------- message "adresse copiée" ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 300;
+  max-width: calc(100vw - 32px);
+  padding: 14px 22px;
+  border: 1px solid var(--violet);
+  border-radius: 999px;
+  background: rgba(12, 12, 17, 0.95);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.45);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  word-break: break-word;
+  opacity: 0;
+  transform: translate(-50%, 20px);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.toast.is-shown { opacity: 1; transform: translate(-50%, 0); }
+
 /* ---------- footer ---------- */
 .footer {
   position: relative;
