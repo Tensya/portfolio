@@ -100,6 +100,34 @@ if (lightbox) {
       <span class="card__play">${PLAY_ICON}</span>`;
     card.setAttribute("aria-label", `Lire : ${title}`);
     card.addEventListener("click", () => open(url, title));
+
+    // Aperçu au survol : un court extrait .mp4 (sans son) qui tourne en boucle
+    const preview = (card.dataset.preview || "").trim();
+    if (preview && !reduceMotion) {
+      let clip = null;
+      card.addEventListener("mouseenter", () => {
+        if (!clip) {
+          clip = document.createElement("video");
+          clip.className = "card__preview";
+          clip.muted = true;
+          clip.setAttribute("muted", ""); // requis par les navigateurs pour lancer sans clic
+          clip.loop = true;
+          clip.playsInline = true;
+          clip.preload = "auto";
+          clip.src = preview;
+          clip.addEventListener("canplay", () => {
+            if (card.classList.contains("is-previewing")) clip.play().catch(() => {});
+          });
+          thumbBox.prepend(clip);
+        }
+        clip.play().catch(() => {});
+        card.classList.add("is-previewing");
+      });
+      card.addEventListener("mouseleave", () => {
+        clip?.pause();
+        card.classList.remove("is-previewing");
+      });
+    }
   });
 }
 
