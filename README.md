@@ -29,4 +29,7 @@ Tant que `data-video` est vide, le site affiche un cadre « Vidéo à venir ».
 ## Mettre à jour le site en ligne
 
 Après une modification : commit, puis push sur la branche `main`.
+
+Si tu modifies `style.css` ou `script.js`, change aussi le numéro `?v=...` dans les 3 pages HTML
+(ex. `style.css?v=20261001` → `style.css?v=20261015`), pour que les visiteurs reçoivent la nouvelle version.
 GitHub Pages met le site à jour automatiquement en 1 à 2 minutes.
