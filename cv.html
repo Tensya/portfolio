@@ -157,7 +157,11 @@
     .job li em { color: var(--muted); }
     .more { display: inline-block; margin-top: 1.5mm; font-size: 8.2pt; font-weight: 700; color: var(--violet); text-decoration: underline; text-underline-offset: 0.6mm; }
 
-    .skills-line { margin: 0 0 5mm; }
+    .skills-line { margin: 0 0 2mm; }
+    .skills-line + .softs { margin-top: 5mm; }
+    .head .meta strong { color: var(--ink); font-weight: 600; }
+    .edu .detail { font-style: normal; font-size: 7.6pt; margin-bottom: 0.4mm; }
+    .job .note { margin: 0; font-size: 8.8pt; color: var(--muted); }
     .skills-line strong { font-weight: 700; }
     .softs { display: flex; flex-wrap: wrap; gap: 2.6mm; margin: 0; padding: 0; list-style: none; }
     .soft { display: grid; justify-items: center; gap: 1.2mm; width: 13.8mm; font-size: 7pt; color: var(--muted); text-align: center; line-height: 1.2; }
@@ -225,7 +229,8 @@
         </div>
         <div class="edu">
           <span class="years">2018</span>
-          <h3>Baccalauréat SEN</h3>
+          <h3>Bac Pro SEN</h3>
+          <p class="detail">Systèmes Électroniques Numériques</p>
           <p>Lycée Alfred Hutinel, Cannes</p>
         </div>
       </section>
@@ -243,15 +248,15 @@
         <h2>Intérêts</h2>
         <div class="interest">
           <h3>Voyages</h3>
-          <p>Passionné par l'exploration et la nouveauté, toujours en quête d'aventures enrichissantes.</p>
+          <p>Exploration, découverte</p>
         </div>
         <div class="interest">
           <h3>Cinéma &amp; Montage</h3>
-          <p>Création de formats courts, montages dynamiques, travail sur le rythme, effets visuels.</p>
+          <p>Formats courts, rythme, effets visuels</p>
         </div>
         <div class="interest">
           <h3>Jeux vidéo</h3>
-          <p>Sessions de jeu, tests de nouveautés pour des projets personnels, analyse de mécaniques.</p>
+          <p>Analyse de mécaniques et d'univers</p>
         </div>
       </section>
     </aside>
@@ -261,11 +266,11 @@
       <header class="head">
         <h1>Alexandre Da Silva</h1>
         <p class="role">Stage &amp; alternance · Monteur VFX</p>
-        <p class="meta">Disponible dès juin 2027 · 26 ans</p>
+        <p class="meta"><strong>Stage :</strong> juin – août 2027 (1 à 2 mois) · <strong>Alternance :</strong> dès septembre 2027<br>26 ans</p>
       </header>
 
       <section class="block">
-        <h2>Expérience</h2>
+        <h2>Expérience &amp; projets</h2>
 
         <div class="job">
           <div class="job-top">
@@ -301,12 +306,14 @@
             <span class="date">2023 – 2025</span>
           </div>
           <p class="where">Carlton, Cannes · Five Seas Hotel, Cannes</p>
+          <p class="note">Rigueur et travail en équipe dans des établissements de luxe.</p>
         </div>
       </section>
 
       <section class="block">
         <h2>Compétences</h2>
-        <p class="skills-line"><strong>Montage :</strong> étalonnage, dérushage, VFX, synchro, habillage, mixage</p>
+        <p class="skills-line"><strong>Montage :</strong> dérushage, synchro, étalonnage, habillage, mixage</p>
+        <p class="skills-line"><strong>VFX :</strong> compositing, tracking, rotoscopie, incrustation fond vert (keying), IA générative (ComfyUI)</p>
         <ul class="softs">
           <li class="soft"><span class="logo logo--adobe">Pr</span>Premiere Pro</li>
           <li class="soft"><span class="logo logo--adobe">Ae</span>After Effects</li>
