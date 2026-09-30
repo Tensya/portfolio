@@ -33,6 +33,12 @@ Tant que `data-video` est vide, le site affiche un cadre « Vidéo à venir ».
 <button class="card reveal" type="button" data-video="https://youtu.be/XXXXXXXXXXX" data-preview="clips/projet1.mp4">
 ```
 
+## Bande démo (écran en haut de l'accueil)
+
+Exporte une version courte et légère de ta bande démo en .mp4, sans son (moins de 10 Mo, 720p suffit),
+mets-la dans `clips/`, puis dans `index.html` : `<div class="viewer" data-showreel="clips/showreel.mp4">`.
+Elle tournera en boucle dans l'écran à la place de « Bande démo — bientôt ».
+
 ## CV
 
 - `cv.html` : le CV (modifie le texte directement dans ce fichier).

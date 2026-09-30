@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261002">
+  <link rel="stylesheet" href="style.css?v=20261003">
 </head>
 <body>
 
@@ -79,11 +79,6 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <div class="hero__orb" aria-hidden="true">
-        <div class="orb orb--chrome"></div>
-        <div class="orb orb--violet"></div>
-      </div>
-
       <div class="hero__content">
         <p class="hero__tag"><span class="dot"></span> <span data-en="Summer internship 2027 · Work-study 2027-2028">Stage été 2027 · Alternance 2027-2028</span></p>
         <h1 class="hero__title chrome">Alex<span class="violet">.</span>Das</h1>
@@ -95,6 +90,19 @@
         <div class="hero__actions">
           <a href="#travaux" class="btn btn--chrome" data-en="See my work">Voir mes projets</a>
           <a href="#contact" class="btn btn--ghost" data-en="Contact me">Me contacter</a>
+        </div>
+      </div>
+
+      <!-- Écran de visionnage.
+           Quand ta bande démo est prête : exporte une version courte et légère en .mp4 (sans son),
+           mets-la dans clips/ et indique-la ici : data-showreel="clips/showreel.mp4" -->
+      <div class="hero__visual" aria-hidden="true">
+        <div class="viewer" data-showreel="">
+          <span class="viewer__corner viewer__corner--tl"></span>
+          <span class="viewer__corner viewer__corner--br"></span>
+          <span class="viewer__rec">REC</span>
+          <span class="viewer__label" data-en="Showreel — coming soon">Bande démo — bientôt</span>
+          <span class="viewer__tc">00:00:00:00</span>
         </div>
       </div>
 
@@ -320,6 +328,6 @@
     <span data-en="Editing · VFX — Paris">Montage · VFX — Paris</span>
   </footer>
 
-  <script src="script.js?v=20261002"></script>
+  <script src="script.js?v=20261003"></script>
 </body>
 </html>

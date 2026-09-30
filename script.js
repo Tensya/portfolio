@@ -216,7 +216,24 @@ document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 // =========================================================
 
 const progress = document.querySelector(".progress");
-const orb = document.querySelector(".hero__orb");
+const heroVisual = document.querySelector(".hero__visual");
+const viewer = document.querySelector(".viewer");
+const viewerTc = document.querySelector(".viewer__tc");
+const stacked = window.matchMedia("(max-width: 900px)"); // écran sous le texte (tablette / téléphone)
+
+// Bande démo dans l'écran : data-showreel="clips/showreel.mp4"
+const showreel = (viewer?.dataset.showreel || "").trim();
+if (viewer && showreel) {
+  const v = document.createElement("video");
+  v.src = showreel;
+  v.muted = true;
+  v.setAttribute("muted", "");
+  v.loop = true;
+  v.autoplay = !reduceMotion;
+  v.playsInline = true;
+  viewer.prepend(v);
+  viewer.classList.add("has-video");
+}
 const heroContent = document.querySelector(".hero__content");
 const floats = [...document.querySelectorAll(".float")];
 
@@ -237,9 +254,16 @@ function tick(now) {
     progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
   }
 
-  // sphère du hero : descend, tourne et grossit un peu ; le texte s'efface
-  if (orb && y < window.innerHeight * 1.2) {
-    orb.style.transform = `translateY(calc(-50% + ${y * 0.35}px)) rotate(${y * 0.06}deg) scale(${1 + y * 0.0005})`;
+  // timecode de l'écran (25 images/seconde, boucle de 60 s)
+  if (viewerTc) {
+    const frames = Math.floor(now / 40) % (60 * 25);
+    const s = Math.floor(frames / 25);
+    viewerTc.textContent = `00:00:${String(s).padStart(2, "0")}:${String(frames % 25).padStart(2, "0")}`;
+  }
+
+  // hero : l'écran descend doucement, le texte s'efface
+  if (heroContent && y < window.innerHeight * 1.2) {
+    if (heroVisual) heroVisual.style.transform = stacked.matches ? "" : `translateY(calc(-50% + ${y * 0.25}px))`;
     heroContent.style.transform = `translateY(${y * 0.18}px)`;
     heroContent.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.8));
   }
