@@ -1211,12 +1211,17 @@ html:not([lang="en"]) .only-en { display: none; } /* affiché seulement en angla
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 8px;
+  align-items: center;
+  gap: 14px 32px;
   padding: 28px var(--gutter);
   border-top: 1px solid var(--line);
   font-size: 0.8rem;
   color: var(--muted);
 }
+.footer__id { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.footer__links { display: flex; flex-wrap: wrap; gap: 10px 24px; }
+.footer__links a { color: var(--text); font-weight: 600; transition: color 0.2s; }
+.footer__links a:hover { color: var(--violet-light); }
 
 /* ---------- apparition au scroll ---------- */
 .reveal {
