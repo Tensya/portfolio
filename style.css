@@ -373,7 +373,8 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 @keyframes blink { 50% { opacity: 0.3; } }
 
 .hero__title {
-  display: inline-block;
+  display: block;
+  width: fit-content; /* toujours sous le badge, même sur très grand écran */
   margin: 0;
   padding-right: 0.05em;
   font-size: clamp(3rem, 6.6vw, 7rem); /* laisse la place à l'écran de visionnage */
