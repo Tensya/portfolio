@@ -57,21 +57,35 @@ if (lightbox) {
   const frame = lightbox.querySelector(".lightbox__frame");
   let lastFocus = null;
 
-  const open = (url, title) => {
+  let closeTimer = null;
+
+  const open = (url, title, poster) => {
     const player = createPlayer(url, title);
     if (!player) return;
+    clearTimeout(closeTimer);
     lastFocus = document.activeElement;
+    // la vidéo apparaît en fondu une fois chargée, par-dessus la vignette
+    player.addEventListener(player.tagName === "VIDEO" ? "loadeddata" : "load", () => player.classList.add("is-loaded"), { once: true });
+    frame.style.backgroundImage = poster ? `url("${poster}")` : "";
     frame.replaceChildren(player);
-    lightbox.hidden = false;
+    // on compense la barre de défilement qui disparaît, pour que la page ne bouge pas
+    const scrollbar = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
-    lightbox.querySelector(".lightbox__close").focus();
+    document.body.style.paddingRight = scrollbar ? `${scrollbar}px` : "";
+    lightbox.hidden = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => lightbox.classList.add("is-open")));
+    lightbox.querySelector(".lightbox__close").focus({ preventScroll: true });
   };
 
   const close = () => {
-    lightbox.hidden = true;
-    frame.replaceChildren(); // coupe la vidéo
-    document.body.style.overflow = "";
-    lastFocus?.focus();
+    lightbox.classList.remove("is-open");
+    lastFocus?.focus({ preventScroll: true });
+    closeTimer = setTimeout(() => {
+      lightbox.hidden = true;
+      frame.replaceChildren(); // coupe la vidéo
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    }, reduceMotion ? 0 : 350);
   };
 
   lightbox.addEventListener("click", (e) => {
@@ -122,7 +136,7 @@ if (lightbox) {
         .catch(() => {});
     }
     card.setAttribute("aria-label", `Lire : ${title}`);
-    card.addEventListener("click", () => open(url, title));
+    card.addEventListener("click", () => open(url, title, thumbBox.querySelector("img")?.src));
 
     // Aperçu au survol : un court extrait .mp4 (sans son) qui tourne en boucle
     const preview = (card.dataset.preview || "").trim();
