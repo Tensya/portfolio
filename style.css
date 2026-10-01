@@ -219,8 +219,8 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 
 /* ---------- hero ---------- */
 .hero {
-  /* marge latérale : sur grand écran, texte + écran restent groupés dans 1400 px centrés */
-  --hero-side: max(var(--gutter), calc((100vw - 1400px) / 2));
+  /* marge latérale : sur grand écran, texte + écran restent groupés dans 1600 px centrés */
+  --hero-side: max(var(--gutter), calc((100vw - 1600px) / 2));
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
@@ -268,7 +268,7 @@ main > section, main > .marquee { position: relative; z-index: 1; }
   position: absolute;
   top: 50%;
   right: var(--hero-side);
-  width: min(38vw, 560px);
+  width: min(38vw, 640px);
   transform: translateY(-50%);
   pointer-events: none;
   will-change: transform;
