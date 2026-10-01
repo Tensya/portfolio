@@ -262,14 +262,21 @@ function tick(now) {
   }
 
   // hero : l'écran descend doucement, le texte s'efface
+  // (sur téléphone/tablette, rien ne bouge au scroll : sinon le texte passe sur l'écran)
   if (heroContent && y < window.innerHeight * 1.2) {
-    if (heroVisual) heroVisual.style.transform = stacked.matches ? "" : `translateY(calc(-50% + ${y * 0.25}px))`;
-    heroContent.style.transform = `translateY(${y * 0.18}px)`;
-    heroContent.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.8));
+    if (stacked.matches) {
+      heroContent.style.transform = "";
+      heroContent.style.opacity = "";
+      if (heroVisual) heroVisual.style.transform = "";
+    } else {
+      if (heroVisual) heroVisual.style.transform = `translateY(calc(-50% + ${y * 0.25}px))`;
+      heroContent.style.transform = `translateY(${y * 0.18}px)`;
+      heroContent.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.8));
+    }
   }
 
-  // étoiles en parallaxe
-  floats.forEach((el) => {
+  // étoiles en parallaxe (masquées sur téléphone, voir style.css)
+  if (!stacked.matches) floats.forEach((el) => {
     const s = Number(el.dataset.speed) || 0;
     el.style.transform = `translate3d(0, ${y * s}px, 0) rotate(${y * s * 0.4}deg)`;
   });

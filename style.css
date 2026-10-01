@@ -653,6 +653,8 @@ main > section, main > .marquee { position: relative; z-index: 1; }
   .hero__content { max-width: none; }
   .hero__title { font-size: clamp(3rem, 13vw, 7rem); }
   .hero__visual { position: relative; top: auto; right: auto; width: 100%; transform: none; }
+  /* fond allégé sur téléphone/tablette : pas de nom qui glisse, pas d'étoiles flottantes */
+  .hero__type, .floaters { display: none; }
 }
 @media (max-width: 560px) { .cards { grid-template-columns: minmax(0, 1fr); } }
 .card {
@@ -1250,4 +1252,11 @@ html:not([lang="en"]) .only-en { display: none; } /* affiché seulement en angla
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* logiciels sur téléphone/tablette : grille de 3, Photoshop masqué pour faire 2 lignes pleines
+   (placé en fin de fichier pour passer après les règles normales de .softs / .soft) */
+@media (max-width: 900px) {
+  .softs { display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; }
+  .soft--hide-mobile { display: none; }
 }
