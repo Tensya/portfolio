@@ -3,6 +3,17 @@
    Palette : noir / chrome / violet (identité)
    ========================================================= */
 
+/* Chiffres alignés (ceux de Syne descendent sous la ligne).
+   Fichier qui ne contient que 0-9, réduit pour avoir la même hauteur que les majuscules de Syne. */
+@font-face {
+  font-family: "Chiffres";
+  src: url(assets/fonts/inter-digits.woff2) format("woff2");
+  font-weight: 400 800;
+  font-display: swap;
+  unicode-range: U+30-39;
+  size-adjust: 87%;
+}
+
 :root {
   --black: #050507;
   --black-2: #0c0c11;
@@ -21,7 +32,7 @@
   --shine: linear-gradient(110deg,
       transparent 42%, rgba(255, 255, 255, 0.95) 50%, transparent 58%);
 
-  --font: "Inter", "Syne", system-ui, sans-serif; /* "Inter" ne contient que les chiffres : les lettres restent en Syne */
+  --font: "Chiffres", "Syne", system-ui, sans-serif; /* "Chiffres" ne contient que 0-9 : les lettres restent en Syne */
   --gutter: clamp(16px, 5vw, 64px);
   --radius: 18px;
 }
