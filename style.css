@@ -21,7 +21,7 @@
   --shine: linear-gradient(110deg,
       transparent 42%, rgba(255, 255, 255, 0.95) 50%, transparent 58%);
 
-  --font: "Syne", system-ui, sans-serif;
+  --font: "Inter", "Syne", system-ui, sans-serif; /* "Inter" ne contient que les chiffres : les lettres restent en Syne */
   --gutter: clamp(16px, 5vw, 64px);
   --radius: 18px;
 }
