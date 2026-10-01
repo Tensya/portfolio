@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- liste des pages du site, pour Google -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://alexdasvfx.github.io/</loc></url>
+  <url><loc>https://alexdasvfx.github.io/projets.html</loc></url>
+  <url><loc>https://alexdasvfx.github.io/courts-metrages.html</loc></url>
+</urlset>
