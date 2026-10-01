@@ -813,7 +813,8 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 /* la boîte contient la vidéo + le bouton fermer, collé au coin de la vidéo */
 .lightbox__box {
   position: relative;
-  width: min(100%, 1200px, calc((100vh - 128px) * 16 / 9));
+  /* --ratio = format de la vidéo (16/9 par défaut, vertical pour certaines vidéos Vimeo) */
+  width: min(100%, 1200px, calc((100vh - 128px) * var(--ratio, 16 / 9)));
   transform: translateY(16px) scale(0.96);
   transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -821,7 +822,7 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 .lightbox__frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--ratio, 16 / 9);
   border-radius: var(--radius);
   overflow: hidden;
   background: #000 center / cover no-repeat; /* la vignette s'affiche pendant le chargement */

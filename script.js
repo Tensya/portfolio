@@ -59,13 +59,21 @@ if (lightbox) {
 
   let closeTimer = null;
 
-  const open = (url, title, poster) => {
+  const box = lightbox.querySelector(".lightbox__box");
+
+  const open = (url, title, poster, ratio) => {
     const player = createPlayer(url, title);
     if (!player) return;
     clearTimeout(closeTimer);
     lastFocus = document.activeElement;
-    // la vidéo apparaît en fondu une fois chargée, par-dessus la vignette
-    player.addEventListener(player.tagName === "VIDEO" ? "loadeddata" : "load", () => player.classList.add("is-loaded"), { once: true });
+    // le lecteur prend le format de la vidéo (ex. vertical)
+    if (ratio) box.style.setProperty("--ratio", ratio);
+    else box.style.removeProperty("--ratio");
+    // la vidéo apparaît en fondu une fois chargée, par-dessus la vignette, puis la vignette est retirée
+    player.addEventListener(player.tagName === "VIDEO" ? "loadeddata" : "load", () => {
+      player.classList.add("is-loaded");
+      setTimeout(() => { if (frame.contains(player)) frame.style.backgroundImage = ""; }, 400);
+    }, { once: true });
     frame.style.backgroundImage = poster ? `url("${poster}")` : "";
     frame.replaceChildren(player);
     // on compense la barre de défilement qui disparaît, pour que la page ne bouge pas
@@ -126,6 +134,7 @@ if (lightbox) {
       fetch(`https://vimeo.com/api/oembed.json?width=960&url=${encodeURIComponent(url)}`)
         .then((r) => (r.ok ? r.json() : null))
         .then((data) => {
+          if (data?.width && data?.height) card.dataset.ratio = (data.width / data.height).toFixed(4);
           if (!data?.thumbnail_url) return;
           const img = document.createElement("img");
           img.src = data.thumbnail_url;
@@ -136,7 +145,7 @@ if (lightbox) {
         .catch(() => {});
     }
     card.setAttribute("aria-label", `Lire : ${title}`);
-    card.addEventListener("click", () => open(url, title, thumbBox.querySelector("img")?.src));
+    card.addEventListener("click", () => open(url, title, thumbBox.querySelector("img")?.src, card.dataset.ratio));
 
     // Aperçu au survol : un court extrait .mp4 (sans son) qui tourne en boucle
     const preview = (card.dataset.preview || "").trim();
