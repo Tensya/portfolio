@@ -810,18 +810,23 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 }
 .lightbox[hidden] { display: none; }
 .lightbox.is-open { opacity: 1; }
-.lightbox__frame {
+/* la boîte contient la vidéo + le bouton fermer, collé au coin de la vidéo */
+.lightbox__box {
   position: relative;
   width: min(100%, 1200px, calc((100vh - 128px) * 16 / 9));
+  transform: translateY(16px) scale(0.96);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lightbox.is-open .lightbox__box { transform: none; }
+.lightbox__frame {
+  position: relative;
+  width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: var(--radius);
   overflow: hidden;
   background: #000 center / cover no-repeat; /* la vignette s'affiche pendant le chargement */
   box-shadow: 0 0 80px rgba(139, 92, 246, 0.3);
-  transform: translateY(16px) scale(0.96);
-  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.lightbox.is-open .lightbox__frame { transform: none; }
 .lightbox__frame iframe, .lightbox__frame video {
   position: absolute;
   inset: 0;
@@ -834,7 +839,7 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 .lightbox__frame .is-loaded { opacity: 1; }
 .lightbox__close {
   position: absolute;
-  top: 16px; right: var(--gutter);
+  bottom: calc(100% + 12px); right: 0;
   width: 44px; height: 44px;
   border-radius: 50%;
   border: 1px solid var(--line);
