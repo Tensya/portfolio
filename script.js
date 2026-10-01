@@ -60,12 +60,34 @@ if (lightbox) {
   let closeTimer = null;
 
   const box = lightbox.querySelector(".lightbox__box");
+  const caption = lightbox.querySelector(".lightbox__caption");
+  const arrows = lightbox.querySelectorAll(".lightbox__nav");
+  const playable = []; // vignettes qui ont une vidéo, dans l'ordre de la page
+  let current = -1;
 
-  const open = (url, title, poster, ratio) => {
+  // texte sous le lecteur : titre, ligne d'infos et phrase (data-desc / data-desc-en sur la vignette)
+  const fillCaption = (card) => {
+    const en = document.documentElement.lang === "en";
+    const desc = (en && card.dataset.descEn) || card.dataset.desc || "";
+    caption.innerHTML = `
+      <span class="lightbox__meta">${card.querySelector(".card__meta")?.innerHTML || ""}</span>
+      <span class="lightbox__title">${card.querySelector(".card__title")?.innerHTML || ""}</span>
+      ${desc ? `<span class="lightbox__desc">${desc}</span>` : ""}`;
+  };
+
+  const show = (index) => {
+    const card = playable[index];
+    if (!card) return;
+    const url = card.dataset.video.trim();
+    const title = card.querySelector(".card__title")?.textContent || "Vidéo";
+    const poster = card.querySelector(".card__thumb img")?.src;
+    const ratio = card.dataset.ratio;
     const player = createPlayer(url, title);
     if (!player) return;
+    current = index;
     clearTimeout(closeTimer);
-    lastFocus = document.activeElement;
+    fillCaption(card);
+    arrows.forEach((a) => { a.hidden = playable.length < 2; });
     // le lecteur prend le format de la vidéo (ex. vertical)
     if (ratio) box.style.setProperty("--ratio", ratio);
     else box.style.removeProperty("--ratio");
@@ -76,6 +98,8 @@ if (lightbox) {
     }, { once: true });
     frame.style.backgroundImage = poster ? `url("${poster}")` : "";
     frame.replaceChildren(player);
+    if (!lightbox.hidden && lightbox.classList.contains("is-open")) return; // déjà ouvert : on change juste de vidéo
+    lastFocus = document.activeElement;
     // on compense la barre de défilement qui disparaît, pour que la page ne bouge pas
     const scrollbar = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
@@ -84,6 +108,7 @@ if (lightbox) {
     requestAnimationFrame(() => requestAnimationFrame(() => lightbox.classList.add("is-open")));
     lightbox.querySelector(".lightbox__close").focus({ preventScroll: true });
   };
+  const step = (dir) => show((current + dir + playable.length) % playable.length);
 
   const close = () => {
     lightbox.classList.remove("is-open");
@@ -97,10 +122,15 @@ if (lightbox) {
   };
 
   lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox || e.target.closest(".lightbox__close")) close();
+    const nav = e.target.closest(".lightbox__nav");
+    if (nav) step(Number(nav.dataset.dir));
+    else if (e.target === lightbox || e.target.closest(".lightbox__close")) close();
   });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !lightbox.hidden) close();
+    if (lightbox.hidden) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") step(-1);
+    if (e.key === "ArrowRight") step(1);
   });
 
   document.querySelectorAll(".card").forEach((card) => {
@@ -145,7 +175,8 @@ if (lightbox) {
         .catch(() => {});
     }
     card.setAttribute("aria-label", `Lire : ${title}`);
-    card.addEventListener("click", () => open(url, title, thumbBox.querySelector("img")?.src, card.dataset.ratio));
+    playable.push(card);
+    card.addEventListener("click", () => show(playable.indexOf(card)));
 
     // Aperçu au survol : un court extrait .mp4 (sans son) qui tourne en boucle
     const preview = (card.dataset.preview || "").trim();

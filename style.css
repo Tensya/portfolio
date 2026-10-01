@@ -814,7 +814,7 @@ main > section, main > .marquee { position: relative; z-index: 1; }
   z-index: 200;
   display: grid;
   place-items: center;
-  padding: 64px var(--gutter);
+  padding: 64px calc(var(--gutter) + 64px); /* place pour les flèches sur les côtés */
   background: rgba(5, 5, 7, 0.94);
   opacity: 0;
   transition: opacity 0.35s ease;
@@ -825,7 +825,7 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 .lightbox__box {
   position: relative;
   /* --ratio = format de la vidéo (16/9 par défaut, vertical pour certaines vidéos Vimeo) */
-  width: min(100%, 1200px, calc((100vh - 128px) * var(--ratio, 16 / 9)));
+  width: min(100%, 1200px, calc((100vh - 230px) * var(--ratio, 16 / 9))); /* 230px : marges + texte sous la vidéo */
   transform: translateY(16px) scale(0.96);
   transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -862,6 +862,53 @@ main > section, main > .marquee { position: relative; z-index: 1; }
   transition: background 0.2s, border-color 0.2s;
 }
 .lightbox__close:hover { background: var(--violet); border-color: var(--violet); }
+
+/* texte sous la vidéo */
+.lightbox__caption {
+  margin-top: 16px;
+  display: grid;
+  gap: 4px;
+}
+.lightbox__meta {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--violet-light);
+}
+.lightbox__title {
+  font-family: "Syne", system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.lightbox__desc { color: var(--text); opacity: 0.8; font-size: 0.95rem; line-height: 1.5; max-width: 60ch; }
+
+/* flèches vidéo précédente / suivante */
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  width: 48px; height: 48px;
+  margin-top: -24px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.lightbox__nav:hover { background: var(--violet); border-color: var(--violet); }
+.lightbox__nav[hidden] { display: none; }
+.lightbox__nav--prev { left: var(--gutter); }
+.lightbox__nav--next { right: var(--gutter); }
+/* sur téléphone : les flèches passent en bas, pour ne pas couvrir la vidéo */
+@media (max-width: 900px) {
+  .lightbox { padding: 64px var(--gutter) 88px; }
+  .lightbox__nav { top: auto; bottom: 20px; margin-top: 0; }
+  .lightbox__nav--prev { left: calc(50% - 60px); }
+  .lightbox__nav--next { right: calc(50% - 60px); }
+}
 @keyframes fade { from { opacity: 0; } }
 
 /* ---------- savoir-faire : 4 blocs ---------- */
