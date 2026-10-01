@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261019">
+  <link rel="stylesheet" href="style.css?v=20261021">
 </head>
 <body>
 
@@ -101,15 +101,23 @@
         </div>
       </div>
 
-      <!-- Écran de visionnage.
-           Quand ta bande démo est prête : exporte une version courte et légère en .mp4 (sans son),
-           mets-la dans clips/ et indique-la ici : data-showreel="clips/showreel.mp4" -->
+      <!-- Écran d'aperçu : les images des vidéos du portfolio défilent en fondu.
+           Pour ajouter une vidéo : copie une ligne <span class="viewer__slide" ...> (image + titre dans data-title).
+           (Si un jour tu as une bande démo : exporte-la en .mp4 léger sans son, mets-la dans clips/
+           et indique-la ici : data-showreel="clips/showreel.mp4" ; elle remplacera les images.) -->
       <div class="hero__visual" aria-hidden="true">
         <div class="viewer" data-showreel="">
+          <span class="viewer__slide viewer__slide--zoom is-on" data-title="Fire House VFX" style="background-image: url(https://i.vimeocdn.com/video/2207507661-56a8e2202eaecf0f5581336e33c5132d8143e52512b814e3adc245ad2d08ee17-d_1280)"></span>
+          <span class="viewer__slide" data-title="L'écume Noire" style="background-image: url(https://i.ytimg.com/vi/kwjQ5rmDQ4E/maxresdefault.jpg)"></span>
+          <span class="viewer__slide" data-title="Casino Live Poster" style="background-image: url(https://i.vimeocdn.com/video/2207504435-4f3b964293a7ae16abc4c247cb499ea77735210f3795069bb538bf8c3526a528-d_1280)"></span>
+          <span class="viewer__slide" data-title="Sans frontières" style="background-image: url(https://i.ytimg.com/vi/NwniXVBa7Bk/maxresdefault.jpg)"></span>
+          <span class="viewer__slide" data-title="Animation 8-bit" data-title-en="8-bit animation" style="background-image: url(https://i.vimeocdn.com/video/2207504369-60c147e0684149800d0033bf300ee8f3fcbf7378021136e145a27e3a7e6fcddd-d_1280)"></span>
+          <span class="viewer__slide" data-title="Statue" style="background-image: url(https://i.vimeocdn.com/video/2207512274-999580347869c34054bcfc6a18e3d98a3d1d616418bd9bf39a317bb998bd53f9-d_1280)"></span>
+          <span class="viewer__slide" data-title="Pub The Kooples" data-title-en="The Kooples ad" style="background-image: url(https://i.vimeocdn.com/video/2207504891-9e7236b266a129ea00c8f8a6ca9f6cb772db6eebb0981829c4b1726495195fea-d_1280)"></span>
           <span class="viewer__corner viewer__corner--tl"></span>
           <span class="viewer__corner viewer__corner--br"></span>
           <span class="viewer__rec">REC</span>
-          <span class="viewer__label" data-en="Showreel — coming soon">Bande démo — bientôt</span>
+          <span class="viewer__title">Fire House VFX</span>
           <span class="viewer__tc">00:00:00:00</span>
         </div>
       </div>
@@ -352,7 +360,7 @@
     </nav>
   </footer>
 
-  <script src="script.js?v=20261019"></script>
+  <script src="script.js?v=20261021"></script>
   <!-- Compteur de visites GoatCounter (sans cookies) : https://alexdasvfx.goatcounter.com -->
   <script data-goatcounter="https://alexdasvfx.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

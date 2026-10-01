@@ -312,7 +312,9 @@ main > section, main > .marquee { position: relative; z-index: 1; }
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px);
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, transparent 60%, rgba(5, 5, 7, 0.65)); /* bas assombri : titre lisible */
 }
 .viewer video {
   position: absolute;
@@ -339,18 +341,31 @@ main > section, main > .marquee { position: relative; z-index: 1; }
   color: #fff;
 }
 .viewer__rec::before { content: "● "; color: #ff4a5a; animation: blink 1.6s infinite; }
-.viewer__label {
+/* aperçu : images des vidéos qui défilent en fondu, avec un zoom lent */
+.viewer__slide {
+  position: absolute;
+  inset: 0;
+  background: center / cover no-repeat;
+  filter: brightness(0.8) saturate(0.95);
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 1.2s ease, transform 5s linear;
+}
+.viewer__slide.is-on { opacity: 1; transform: scale(1.1); }
+.viewer__slide--zoom { background-size: auto 140%; } /* image avec bandes noires (Fire House) */
+.viewer__title {
   position: absolute;
   z-index: 2;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.25em;
+  bottom: 14px; right: 48px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.4s ease;
 }
+.viewer__title.is-changing { opacity: 0; }
 .viewer__tc {
   position: absolute;
   z-index: 2;
@@ -359,7 +374,7 @@ main > section, main > .marquee { position: relative; z-index: 1; }
   letter-spacing: 0.06em;
   color: var(--violet-light);
 }
-.viewer.has-video .viewer__label { display: none; }
+.viewer.has-video .viewer__slide, .viewer.has-video .viewer__title { display: none; }
 @keyframes drift { to { background-position: 100% 50%; } }
 @keyframes spin { to { rotate: 360deg; } }
 

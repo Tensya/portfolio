@@ -280,6 +280,25 @@ if (viewer && showreel) {
   viewer.prepend(v);
   viewer.classList.add("has-video");
 }
+
+// Sinon : aperçu, les images des vidéos défilent avec leur titre
+const slides = viewer && !showreel ? [...viewer.querySelectorAll(".viewer__slide")] : [];
+const viewerTitle = document.querySelector(".viewer__title");
+let slideIndex = 0;
+const slideTitle = (s) => (document.documentElement.lang === "en" && s.dataset.titleEn) || s.dataset.title;
+if (slides.length > 1 && !reduceMotion) {
+  setInterval(() => {
+    if (document.hidden) return;
+    slides[slideIndex].classList.remove("is-on");
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add("is-on");
+    viewerTitle.classList.add("is-changing");
+    setTimeout(() => {
+      viewerTitle.textContent = slideTitle(slides[slideIndex]);
+      viewerTitle.classList.remove("is-changing");
+    }, 400);
+  }, 3500);
+}
 const heroContent = document.querySelector(".hero__content");
 const floats = [...document.querySelectorAll(".float")];
 
