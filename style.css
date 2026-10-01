@@ -219,12 +219,14 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 
 /* ---------- hero ---------- */
 .hero {
+  /* marge latérale : sur grand écran, texte + écran restent groupés dans 1400 px centrés */
+  --hero-side: max(var(--gutter), calc((100vw - 1400px) / 2));
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding: 120px var(--gutter) 80px;
+  padding: 120px var(--hero-side) 80px;
   overflow: hidden;
 }
 /* ton nom en contour qui glisse en fond */
@@ -265,8 +267,8 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 .hero__visual {
   position: absolute;
   top: 50%;
-  right: var(--gutter);
-  width: min(38vw, 600px);
+  right: var(--hero-side);
+  width: min(38vw, 560px);
   transform: translateY(-50%);
   pointer-events: none;
   will-change: transform;
