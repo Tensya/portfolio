@@ -94,10 +94,18 @@ if (lightbox) {
     }
 
     const yt = youtubeId(url);
-    const thumb = card.dataset.thumb || (yt ? `https://i.ytimg.com/vi/${yt}/hqdefault.jpg` : "");
+    // YouTube : miniature HD (maxresdefault), sinon repli sur la version standard
+    const thumb = card.dataset.thumb || (yt ? `https://i.ytimg.com/vi/${yt}/maxresdefault.jpg` : "");
     thumbBox.innerHTML = `
       ${thumb ? `<img src="${thumb}" alt="" loading="lazy">` : ""}
       <span class="card__play">${PLAY_ICON}</span>`;
+    if (yt && !card.dataset.thumb) {
+      const img = thumbBox.querySelector("img");
+      const fallback = () => { img.src = `https://i.ytimg.com/vi/${yt}/hqdefault.jpg`; };
+      img.addEventListener("error", fallback, { once: true });
+      // quand la HD n'existe pas, YouTube renvoie une petite image grise de 120 px
+      img.addEventListener("load", () => { if (img.naturalWidth <= 120) fallback(); }, { once: true });
+    }
 
     // Vimeo : on récupère la miniature choisie sur Vimeo (via son service oEmbed)
     if (!thumb && /vimeo\.com/.test(url)) {
