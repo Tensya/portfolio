@@ -98,6 +98,21 @@ if (lightbox) {
     thumbBox.innerHTML = `
       ${thumb ? `<img src="${thumb}" alt="" loading="lazy">` : ""}
       <span class="card__play">${PLAY_ICON}</span>`;
+
+    // Vimeo : on récupère la miniature choisie sur Vimeo (via son service oEmbed)
+    if (!thumb && /vimeo\.com/.test(url)) {
+      fetch(`https://vimeo.com/api/oembed.json?width=960&url=${encodeURIComponent(url)}`)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          if (!data?.thumbnail_url) return;
+          const img = document.createElement("img");
+          img.src = data.thumbnail_url;
+          img.alt = "";
+          img.loading = "lazy";
+          thumbBox.prepend(img);
+        })
+        .catch(() => {});
+    }
     card.setAttribute("aria-label", `Lire : ${title}`);
     card.addEventListener("click", () => open(url, title));
 
