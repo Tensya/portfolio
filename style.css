@@ -267,7 +267,8 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 .hero__visual {
   position: absolute;
   top: 50%;
-  right: var(--hero-side);
+  /* sur très grand écran, l'écran se rapproche du bord droit plus vite que le texte du bord gauche */
+  right: max(var(--gutter), calc((100vw - 1600px) * 0.3));
   width: min(38vw, 640px);
   transform: translateY(-50%);
   pointer-events: none;
