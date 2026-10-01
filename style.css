@@ -736,6 +736,7 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 }
 .card__title {
   display: block;
+  font-family: "Syne", system-ui, sans-serif; /* le 8 de Syne va mieux avec les lettres larges */
   font-size: 1.15rem;
   font-weight: 800;
   line-height: 1.25;
