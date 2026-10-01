@@ -505,51 +505,30 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 }
 .tile:hover .tile__bg { transform: scale(1.08); }
 
-/* Projets : chrome liquide + violet */
-.tile--projets .tile__bg {
-  background:
-    var(--cover, none),
-    radial-gradient(ellipse 50% 40% at 25% 30%, rgba(255,255,255,0.85), transparent 70%),
-    radial-gradient(ellipse 60% 50% at 75% 70%, rgba(139,92,246,0.9), transparent 70%),
-    radial-gradient(ellipse 40% 60% at 60% 20%, rgba(182,156,255,0.6), transparent 70%),
-    linear-gradient(135deg, #1b1b22, #8a8f9a 40%, #15151d 60%, #4c1d95);
-  background-size: cover, 200% 200%, 200% 200%, 200% 200%, 100% 100%;
-  animation: liquid 12s ease-in-out infinite alternate;
-}
-@keyframes liquid {
-  0%   { background-position: center, 0% 0%, 100% 100%, 50% 0%, 0 0; }
-  50%  { background-position: center, 100% 50%, 0% 50%, 0% 100%, 0 0; }
-  100% { background-position: center, 50% 100%, 50% 0%, 100% 50%, 0 0; }
-}
-
-/* Courts-métrages : ambiance salle de cinéma */
-.tile--films .tile__bg {
-  background:
-    var(--cover, none),
-    radial-gradient(ellipse 70% 45% at 50% 45%, rgba(233,235,240,0.18), transparent 70%),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 6px),
-    linear-gradient(180deg, #0c0c11, #1b1530 55%, #050507);
-  background-size: cover, 100% 100%, 100% 100%, 100% 100%;
-}
-.tile--films::before, .tile--films::after {
-  /* bandes noires façon cinémascope, qui s'ouvrent au survol */
+/* images des vidéos : la 1re est visible, les autres défilent en fondu au survol (script.js) */
+.tile__bg { background: #000; filter: brightness(0.72) saturate(0.9); }
+.tile__bg::after { /* touche violette */
   content: "";
   position: absolute;
-  left: 0; right: 0;
-  z-index: 0;
-  height: 14%;
-  background: #000;
-  transition: height 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  inset: 0;
+  background: linear-gradient(135deg, rgba(76, 29, 149, 0.35), transparent 60%);
+  mix-blend-mode: screen;
 }
-.tile--films::before { top: 0; }
-.tile--films::after  { bottom: 0; }
-.tile--films:hover::before, .tile--films:hover::after { height: 6%; }
+.tile__img {
+  position: absolute;
+  inset: 0;
+  background: center / cover no-repeat;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.tile__img.is-on { opacity: 1; }
+.tile__img--zoom { background-size: auto 140%; } /* image avec bandes noires (Fire House) : on zoome pour les cacher */
 
 .tile__veil {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(180deg, transparent 35%, rgba(5,5,7,0.85));
+  background: linear-gradient(180deg, rgba(5, 5, 7, 0.1) 20%, rgba(5, 5, 7, 0.9));
 }
 .tile__content {
   position: absolute;

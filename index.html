@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&text=0123456789&display=swap" rel="stylesheet"><!-- chiffres alignés (ceux de Syne descendent sous la ligne) -->
-  <link rel="stylesheet" href="style.css?v=20261017">
+  <link rel="stylesheet" href="style.css?v=20261018">
 </head>
 <body>
 
@@ -132,8 +132,8 @@
     </div>
 
     <!-- ============ TRAVAUX : 2 catégories ============
-         Pour mettre une image de fond sur une tuile, ajoute par exemple :
-         style="--cover: url(images/projets.jpg)" sur la balise <a class="tile ...">
+         Images de fond : une ligne <span class="tile__img"> par image (vignettes Vimeo / YouTube).
+         La 1re (avec "is-on") est visible ; au survol, les images défilent en fondu.
     -->
     <section id="travaux" class="section">
       <div class="section__head reveal">
@@ -142,8 +142,14 @@
       </div>
 
       <div class="works">
-        <a class="tile tile--projets reveal" href="projets.html">
-          <span class="tile__bg"></span>
+        <a class="tile reveal" href="projets.html">
+          <span class="tile__bg">
+            <span class="tile__img tile__img--zoom is-on" style="background-image: url(https://i.vimeocdn.com/video/2207507661-56a8e2202eaecf0f5581336e33c5132d8143e52512b814e3adc245ad2d08ee17-d_1280)"></span>
+            <span class="tile__img" style="background-image: url(https://i.vimeocdn.com/video/2207504369-60c147e0684149800d0033bf300ee8f3fcbf7378021136e145a27e3a7e6fcddd-d_1280)"></span>
+            <span class="tile__img" style="background-image: url(https://i.vimeocdn.com/video/2207504435-4f3b964293a7ae16abc4c247cb499ea77735210f3795069bb538bf8c3526a528-d_1280)"></span>
+            <span class="tile__img" style="background-image: url(https://i.vimeocdn.com/video/2207512274-999580347869c34054bcfc6a18e3d98a3d1d616418bd9bf39a317bb998bd53f9-d_1280)"></span>
+            <span class="tile__img" style="background-image: url(https://i.vimeocdn.com/video/2207504891-9e7236b266a129ea00c8f8a6ca9f6cb772db6eebb0981829c4b1726495195fea-d_1280)"></span>
+          </span>
           <span class="tile__veil"></span>
           <span class="tile__cta" aria-hidden="true">→</span>
           <span class="tile__content">
@@ -152,8 +158,11 @@
             <span class="tile__sub">Edits · VFX · Motion</span>
           </span>
         </a>
-        <a class="tile tile--films reveal" href="courts-metrages.html">
-          <span class="tile__bg"></span>
+        <a class="tile reveal" href="courts-metrages.html">
+          <span class="tile__bg">
+            <span class="tile__img is-on" style="background-image: url(https://i.ytimg.com/vi/kwjQ5rmDQ4E/maxresdefault.jpg)"></span>
+            <span class="tile__img" style="background-image: url(https://i.ytimg.com/vi/NwniXVBa7Bk/maxresdefault.jpg)"></span>
+          </span>
           <span class="tile__veil"></span>
           <span class="tile__cta" aria-hidden="true">→</span>
           <span class="tile__content">
@@ -344,7 +353,7 @@
     </nav>
   </footer>
 
-  <script src="script.js?v=20261017"></script>
+  <script src="script.js?v=20261018"></script>
   <!-- Compteur de visites GoatCounter (sans cookies) : https://alexdasvfx.goatcounter.com -->
   <script data-goatcounter="https://alexdasvfx.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

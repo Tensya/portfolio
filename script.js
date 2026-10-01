@@ -359,6 +359,24 @@ function tick(now) {
 
 if (!reduceMotion) requestAnimationFrame(tick);
 
+// ---------- Tuiles de l'accueil : les images défilent en fondu au survol ----------
+document.querySelectorAll(".tile").forEach((tile) => {
+  const imgs = [...tile.querySelectorAll(".tile__img")];
+  if (imgs.length < 2 || reduceMotion) return;
+  let i = 0, timer = null;
+  const show = (n) => {
+    imgs[i].classList.remove("is-on");
+    i = n % imgs.length;
+    imgs[i].classList.add("is-on");
+  };
+  tile.addEventListener("mouseenter", () => {
+    clearInterval(timer);
+    show(i + 1);
+    timer = setInterval(() => show(i + 1), 1400);
+  });
+  tile.addEventListener("mouseleave", () => { clearInterval(timer); show(0); });
+});
+
 // ---------- Année du footer ----------
 const year = document.getElementById("year");
 if (year) year.textContent = new Date().getFullYear();
