@@ -104,6 +104,10 @@ if (lightbox) {
     current = index;
     clearTimeout(closeTimer);
     fillCaption(card);
+    // statistiques : on compte l'ouverture de cette vidéo (événement GoatCounter "video/<titre>")
+    const titleEl = card.querySelector(".card__title");
+    const name = (titleEl?.dataset.fr ? new DOMParser().parseFromString(titleEl.dataset.fr, "text/html").body.textContent : title).trim();
+    try { window.goatcounter?.count?.({ path: `video/${name}`, title: name, event: true }); } catch {}
     arrows.forEach((a) => { a.hidden = playable.length < 2; });
     // le lecteur prend le format de la vidéo (ex. vertical)
     if (ratio) box.style.setProperty("--ratio", ratio);
@@ -436,12 +440,19 @@ document.querySelectorAll(".tile").forEach((tile) => {
     i = n % imgs.length;
     imgs[i].classList.add("is-on");
   };
-  tile.addEventListener("mouseenter", () => {
+  const start = () => {
     clearInterval(timer);
     show(i + 1);
     timer = setInterval(() => show(i + 1), 1400);
-  });
-  tile.addEventListener("mouseleave", () => { clearInterval(timer); show(0); });
+  };
+  const stop = () => { clearInterval(timer); show(0); };
+  // téléphone / tablette (pas de souris) : ça défile tout seul quand la carte est à l'écran
+  if (window.matchMedia("(hover: none)").matches) {
+    new IntersectionObserver(([entry]) => (entry.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(tile);
+  } else {
+    tile.addEventListener("mouseenter", start);
+    tile.addEventListener("mouseleave", stop);
+  }
 });
 
 // ---------- Année du footer ----------
