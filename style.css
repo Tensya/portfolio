@@ -1333,6 +1333,4 @@ html:not([lang="en"]) .only-en { display: none; } /* affiché seulement en angla
 /* logiciels sur téléphone/tablette : grille de 3, Photoshop masqué pour faire 2 lignes pleines
    (placé en fin de fichier pour passer après les règles normales de .softs / .soft) */
 @media (max-width: 900px) {
-  .softs { display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; }
-  .soft--hide-mobile { display: none; }
-}
+  .softs { display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; }}
