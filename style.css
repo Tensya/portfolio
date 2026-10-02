@@ -1159,6 +1159,7 @@ main > section, main > .marquee { position: relative; z-index: 1; }
 .soft__logo--blender { background: #1d2733; border: 2px solid #34495e; }
 .soft__logo--comfy { background: #221a2b; border: 2px solid #3d3050; }
 .soft__logo--comfy svg { width: 100%; height: 100%; }
+.soft__logo--beeble { background: #12161a url(assets/logo-beeble.png) center / 72% no-repeat; border: 2px solid #1f4d3b; }
 :where(.soft__logo) svg { width: 70%; height: 70%; } /* taille par défaut, remplaçable logo par logo */
 
 /* ---------- à propos ---------- */
@@ -1347,4 +1348,6 @@ html:not([lang="en"]) .only-en { display: none; } /* affiché seulement en angla
 /* logiciels sur téléphone/tablette : grille de 3, Photoshop masqué pour faire 2 lignes pleines
    (placé en fin de fichier pour passer après les règles normales de .softs / .soft) */
 @media (max-width: 900px) {
-  .softs { display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; }}
+  .softs { display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; }
+  .soft--hide-mobile { display: none; } /* sur téléphone : 6 logos (2 lignes de 3) */
+}
