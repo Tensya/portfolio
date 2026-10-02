@@ -14,7 +14,7 @@ function youtubeId(url) {
 
 function embedUrl(url) {
   const yt = youtubeId(url);
-  if (yt) return `https://www.youtube-nocookie.com/embed/${yt}?rel=0&autoplay=1`;
+  if (yt) return `https://www.youtube-nocookie.com/embed/${yt}?rel=0&autoplay=1&enablejsapi=1`;
 
   const vimeo = url.match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/(\w+))?/);
   if (vimeo) {
@@ -41,6 +41,19 @@ function createPlayer(url, title) {
   iframe.allow = "autoplay; fullscreen; picture-in-picture";
   iframe.allowFullscreen = true;
   return iframe;
+}
+
+// Volume de départ (data-volume="0.2" sur la vignette = 20 %), pour une vidéo dont le son est trop fort.
+// Vimeo et YouTube acceptent cet ordre par message ; on le renvoie plusieurs fois le temps que le lecteur soit prêt.
+function setStartVolume(player, volume) {
+  if (player.tagName === "VIDEO") { player.volume = volume; return; }
+  const send = () => {
+    const win = player.contentWindow;
+    if (!win) return;
+    if (player.src.includes("vimeo")) win.postMessage({ method: "setVolume", value: volume }, "https://player.vimeo.com");
+    else win.postMessage(JSON.stringify({ event: "command", func: "setVolume", args: [Math.round(volume * 100)] }), "*");
+  };
+  player.addEventListener("load", () => [0, 500, 1200, 2500].forEach((t) => setTimeout(send, t)), { once: true });
 }
 
 const PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l16 9-16 9z"/></svg>';
@@ -84,6 +97,9 @@ if (lightbox) {
     const ratio = card.dataset.ratio;
     const player = createPlayer(url, title);
     if (!player) return;
+    // Vimeo garde le dernier volume en mémoire : on remet 100 % sauf si la vignette indique un autre volume
+    const volume = parseFloat(card.dataset.volume);
+    setStartVolume(player, volume >= 0 && volume <= 1 ? volume : 1);
     current = index;
     clearTimeout(closeTimer);
     fillCaption(card);
