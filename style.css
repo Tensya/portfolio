@@ -1320,6 +1320,20 @@ html:not([lang="en"]) .only-en { display: none; } /* affiché seulement en angla
   .skills { grid-template-columns: minmax(0, 1fr); }
   .timeline__track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .clip__name { font-size: 0.7rem; letter-spacing: 0.01em; }
+  /* sur 2 colonnes : couleurs en damier (sinon une colonne violette, une grise).
+     On inverse la 3e et la 4e étape (nth-child compte aussi la tête de lecture, d'où 4 et 5). */
+  .clip:nth-child(4) {
+    background: linear-gradient(180deg, rgba(139, 92, 246, 0.55), rgba(76, 29, 149, 0.55));
+    border-color: rgba(182, 156, 255, 0.45);
+  }
+  .clip:nth-child(5) {
+    background: linear-gradient(180deg, rgba(210, 214, 222, 0.35), rgba(120, 124, 135, 0.3));
+    border-color: rgba(233, 235, 240, 0.35);
+  }
+  .clip.is-active {
+    background: linear-gradient(180deg, var(--violet-light), var(--violet));
+    border-color: #fff;
+  }
   .switch a { padding: 10px 14px; font-size: 0.85rem; }
 }
 
