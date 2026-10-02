@@ -56,7 +56,8 @@
     }
 
     /* ---------- colonne gauche ---------- */
-    .side {
+    .side { grid-column: 1; grid-row: 1; }
+    .main { grid-column: 2; grid-row: 1; }    .side {
       padding: 14mm 8mm 10mm;
       background: var(--side);
       color: var(--side-text);
@@ -108,7 +109,7 @@
 
     /* ---------- colonne droite ---------- */
     .main { padding: 14mm 12mm 10mm 11mm; display: flex; flex-direction: column; }
-    .head h1 { font-size: 25pt; font-weight: 800; letter-spacing: 0.06em; line-height: 1; }
+    .head h1 { font-size: 22pt; font-weight: 800; letter-spacing: 0.05em; line-height: 1.02; }
     .head .role {
       margin: 4mm 0 0;
       font-family: "Syne", sans-serif;
@@ -120,7 +121,7 @@
     }
     .head .meta { margin: 1.5mm 0 0; color: var(--muted); font-size: 9pt; letter-spacing: 0.02em; }
 
-    .block { margin-top: 11mm; }
+    .block { margin-top: 9mm; }
     .block > h2 {
       margin-bottom: 4mm;
       padding-bottom: 1.8mm;
@@ -129,25 +130,17 @@
       letter-spacing: 0.03em;
     }
 
-    .job { position: relative; padding-left: 5mm; }
-    .job + .job { margin-top: 7mm; }
-    .job::before {
-      /* point de la frise */
-      content: "";
-      position: absolute;
-      left: 0; top: 1.4mm;
-      width: 2mm; height: 2mm;
-      border-radius: 50%;
-      background: var(--violet);
+    /* frise : point + trait dessinés en fond (pas d'éléments positionnés, pour que le texte du PDF reste dans l'ordre de lecture) */
+    .job {
+      padding: 0 0 7mm 5mm;
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 2'%3E%3Ccircle cx='1' cy='1' r='1' fill='%236d3fd6'/%3E%3C/svg%3E") 0 1.4mm / 2mm 2mm no-repeat,
+        linear-gradient(var(--line), var(--line)) 0.85mm 4.5mm / 0.3mm calc(100% - 3.1mm) no-repeat;
     }
-    .job::after {
-      content: "";
-      position: absolute;
-      left: 0.85mm; top: 4.5mm; bottom: -6.5mm;
-      width: 0.3mm;
-      background: var(--line);
+    .job:last-child {
+      padding-bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 2'%3E%3Ccircle cx='1' cy='1' r='1' fill='%236d3fd6'/%3E%3C/svg%3E") 0 1.4mm / 2mm 2mm no-repeat;
     }
-    .job:last-child::after { display: none; }
     .job-top { display: flex; justify-content: space-between; gap: 4mm; align-items: baseline; }
     .job h3 { font-size: 11pt; letter-spacing: 0.02em; }
     .job .date { flex: none; font-size: 8pt; font-weight: 700; color: var(--violet); white-space: nowrap; }
@@ -158,7 +151,7 @@
     .more { display: inline-block; margin-top: 1.5mm; font-size: 8.2pt; font-weight: 700; color: var(--violet); text-decoration: underline; text-underline-offset: 0.6mm; }
 
     .skills-line { margin: 0 0 2mm; }
-    .skills-line + .softs { margin-top: 5mm; }
+    .skills-line + .softs { margin-top: 5mm; margin-bottom: 7mm; }
     .head .meta strong { color: var(--ink); font-weight: 600; }
     .edu .detail { font-style: normal; font-size: 7.6pt; margin-bottom: 0.4mm; }
     .num { font-family: "Inter", sans-serif; font-weight: 700; } /* chiffres alignés (ceux de Syne descendent) */
@@ -184,7 +177,7 @@
     .logo--comfy { background: #221a2b; border: 0.4mm solid #3d3050; }
     .logo--comfy svg { width: 100%; height: 100%; }
 
-    .portfolio { margin-top: auto; display: flex; align-items: center; gap: 6mm; padding-top: 6mm; border-top: 0.4mm solid var(--ink); }
+    .portfolio { margin-top: auto; flex: none; display: flex; align-items: center; gap: 6mm; padding-top: 6mm; border-top: 0.4mm solid var(--ink); }
     .portfolio img { width: 28mm; height: 28mm; }
     .portfolio h2 { font-size: 12.5pt; letter-spacing: 0.03em; }
     .portfolio p { margin: 1.5mm 0 0; color: var(--muted); }
@@ -194,78 +187,10 @@
 <body>
 
   <div class="page">
-
-    <!-- ========== COLONNE GAUCHE ========== -->
-    <aside class="side">
-      <img class="photo" src="assets/photo-cv.jpg" alt="Alexandre Da Silva">
-
-      <section>
-        <h2>Contact</h2>
-        <ul class="contact">
-          <li data-phone hidden>
-            <span class="ico"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></span>
-            <span class="phone-num"></span>
-          </li>
-          <li>
-            <span class="ico"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg></span>
-            <a href="mailto:alexandre.correiadasilva@eicar.fr">alexandre.correiadasilva<wbr>@eicar.fr</a>
-          </li>
-          <li>
-            <span class="ico"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.84-2.05 3.78-2.05 4.04 0 4.79 2.66 4.79 6.12V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4z"/></svg></span>
-            <a href="https://www.linkedin.com/in/alexandre-correia-da-silva-1749001b8/">linkedin.com/in/alexandre-correia-da-silva</a>
-          </li>
-          <li>
-            <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8 8 0 0 1 18.9 8zM12 4.04A14 14 0 0 1 13.9 8h-3.8A14 14 0 0 1 12 4.04zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4zm.84 2h2.95a15.7 15.7 0 0 0 1.38 3.56A8 8 0 0 1 5.1 16zm2.95-8H5.1a8 8 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.05 8zM12 19.96A14 14 0 0 1 10.1 16h3.8A14 14 0 0 1 12 19.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.25 5.56A15.7 15.7 0 0 0 15.95 16h2.95a8 8 0 0 1-4.31 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4z"/></svg></span>
-            <a href="https://alexdasvfx.github.io">alexdasvfx.github.io</a>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Formation</h2>
-        <div class="edu">
-          <span class="years">2025 – 2028</span>
-          <h3>Bachelor Montage VFX</h3>
-          <p>EICAR, Paris</p>
-        </div>
-        <div class="edu">
-          <span class="years">2018</span>
-          <h3>Bac Pro SEN</h3>
-          <p class="detail">Systèmes Électroniques Numériques</p>
-          <p>Lycée Alfred Hutinel, Cannes</p>
-        </div>
-      </section>
-
-      <section>
-        <h2>Langues</h2>
-        <ul class="langs">
-          <li>Anglais <b>C1</b></li>
-          <li>Portugais <b>C1</b></li>
-          <li>Espagnol <b>A2</b></li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Intérêts</h2>
-        <div class="interest">
-          <h3>Voyages</h3>
-          <p>Exploration, découverte</p>
-        </div>
-        <div class="interest">
-          <h3>Cinéma &amp; Montage</h3>
-          <p>Formats courts, rythme, effets visuels</p>
-        </div>
-        <div class="interest">
-          <h3>Jeux vidéo</h3>
-          <p>Analyse de mécaniques et d'univers</p>
-        </div>
-      </section>
-    </aside>
-
     <!-- ========== COLONNE DROITE ========== -->
     <main class="main">
       <header class="head">
-        <h1>Alexandre Da Silva</h1>
+        <h1>Alexandre Correia<br>Da Silva</h1>
         <p class="role">Stage &amp; alternance · Monteur VFX</p>
         <p class="meta"><strong>Stage :</strong> juin – août 2027 (1 à 2 mois) · <strong>Alternance :</strong> dès septembre 2027</p>
       </header>
@@ -283,6 +208,7 @@
             <li>Montage d'interviews</li>
             <li>Montage de captations de conférences avec synthés</li>
             <li>Montage de reels Instagram</li>
+            <li>Vidéos livrées le jour même</li>
           </ul>
         </div>
 
@@ -314,7 +240,7 @@
       <section class="block">
         <h2>Compétences</h2>
         <p class="skills-line"><strong>Montage :</strong> dérushage, synchro, étalonnage, habillage, mixage</p>
-        <p class="skills-line"><strong>VFX :</strong> compositing, tracking, rotoscopie, incrustation fond vert (keying), IA générative</p>
+        <p class="skills-line"><strong>VFX :</strong> compositing, tracking et masques, rotoscopie, incrustation fond vert, 3D, IA</p>
         <ul class="softs">
           <li class="soft"><span class="logo logo--adobe">Pr</span>Premiere Pro</li>
           <li class="soft"><span class="logo logo--adobe">Ae</span>After Effects</li>
@@ -360,6 +286,78 @@
         </div>
       </section>
     </main>
+
+    <!-- colonne gauche placée après dans le code : les logiciels de recrutement lisent d'abord le nom et l'expérience (l'affichage ne change pas) -->
+    <!-- ========== COLONNE GAUCHE ========== -->
+    <aside class="side">
+      <img class="photo" src="assets/photo-cv.jpg" alt="Alexandre Da Silva">
+
+      <section>
+        <h2>Contact</h2>
+        <ul class="contact">
+          <li data-phone hidden>
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></span>
+            <span class="phone-num"></span>
+          </li>
+          <li>
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg></span>
+            <span>Paris</span>
+          </li>
+          <li>
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg></span>
+            <a href="mailto:alexandre.correiadasilva@eicar.fr">alexandre.correiadasilva<wbr>@eicar.fr</a>
+          </li>
+          <li>
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.84-2.05 3.78-2.05 4.04 0 4.79 2.66 4.79 6.12V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4z"/></svg></span>
+            <a href="https://www.linkedin.com/in/alexandre-correia-da-silva-1749001b8/">linkedin.com/in/alexandre-correia-da-silva</a>
+          </li>
+          <li>
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8 8 0 0 1 18.9 8zM12 4.04A14 14 0 0 1 13.9 8h-3.8A14 14 0 0 1 12 4.04zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4zm.84 2h2.95a15.7 15.7 0 0 0 1.38 3.56A8 8 0 0 1 5.1 16zm2.95-8H5.1a8 8 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.05 8zM12 19.96A14 14 0 0 1 10.1 16h3.8A14 14 0 0 1 12 19.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.25 5.56A15.7 15.7 0 0 0 15.95 16h2.95a8 8 0 0 1-4.31 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4z"/></svg></span>
+            <a href="https://alexdasvfx.github.io">alexdasvfx.github.io</a>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Formation</h2>
+        <div class="edu">
+          <span class="years">2025 – 2028</span>
+          <h3>Bachelor Montage VFX</h3>
+          <p>EICAR, Paris</p>
+        </div>
+        <div class="edu">
+          <span class="years">2018</span>
+          <h3>Bac Pro SEN</h3>
+          <p class="detail">Systèmes Électroniques Numériques</p>
+          <p>Lycée Alfred Hutinel, Cannes</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Langues</h2>
+        <ul class="langs">
+          <li>Anglais <b>C1</b></li>
+          <li>Portugais <b>C1</b></li>
+          <li>Espagnol <b>A2</b></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Intérêts</h2>
+        <div class="interest">
+          <h3>Voyages</h3>
+          <p>Passionné par l'exploration et la nouveauté, toujours en quête d'aventures enrichissantes</p>
+        </div>
+        <div class="interest">
+          <h3>Cinéma &amp; Montage</h3>
+          <p>Formats courts, montages dynamiques, rythme, effets visuels</p>
+        </div>
+        <div class="interest">
+          <h3>Jeux vidéo</h3>
+          <p>Tests de nouveautés, analyse de mécaniques</p>
+        </div>
+      </section>
+    </aside>
   </div>
 
   <!-- Numéro de téléphone : seulement si le fichier privé existe (jamais publié).
