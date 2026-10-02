@@ -97,9 +97,10 @@ if (lightbox) {
     const ratio = card.dataset.ratio;
     const player = createPlayer(url, title);
     if (!player) return;
-    // Vimeo garde le dernier volume en mémoire : on remet 100 % sauf si la vignette indique un autre volume
+    // toutes les vidéos s'ouvrent à 50 %, sauf si la vignette indique un autre volume (data-volume)
+    // (à régler à chaque fois : Vimeo garde sinon le dernier volume en mémoire)
     const volume = parseFloat(card.dataset.volume);
-    setStartVolume(player, volume >= 0 && volume <= 1 ? volume : 1);
+    setStartVolume(player, volume >= 0 && volume <= 1 ? volume : 0.5);
     current = index;
     clearTimeout(closeTimer);
     fillCaption(card);
