@@ -440,14 +440,15 @@ document.querySelectorAll(".tile").forEach((tile) => {
     i = n % imgs.length;
     imgs[i].classList.add("is-on");
   };
+  const touch = window.matchMedia("(hover: none)").matches; // téléphone / tablette : pas de souris
   const start = () => {
     clearInterval(timer);
     show(i + 1);
-    timer = setInterval(() => show(i + 1), 1400);
+    timer = setInterval(() => show(i + 1), touch ? 2500 : 1400); // plus lent sur téléphone (ça tourne tout seul)
   };
   const stop = () => { clearInterval(timer); show(0); };
-  // téléphone / tablette (pas de souris) : ça défile tout seul quand la carte est à l'écran
-  if (window.matchMedia("(hover: none)").matches) {
+  // téléphone / tablette : ça défile tout seul quand la carte est à l'écran
+  if (touch) {
     new IntersectionObserver(([entry]) => (entry.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(tile);
   } else {
     tile.addEventListener("mouseenter", start);
