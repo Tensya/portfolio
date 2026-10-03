@@ -340,11 +340,18 @@ let slideIndex = 0;
 const slideTitle = (s) => (document.documentElement.lang === "en" && s.dataset.titleEn) || s.dataset.title;
 if (viewerTitle && slides[0]) viewerTitle.textContent = slideTitle(slides[0]); // 1er titre dans la bonne langue
 if (slides.length > 1 && !reduceMotion) {
+  slides[0].classList.add("is-anim"); // la 1re image commence son dézoom tout de suite
   setInterval(() => {
     if (document.hidden) return;
-    slides[slideIndex].classList.remove("is-on");
+    // l'image qui part disparaît en fondu mais garde son dézoom en cours ; on le remet à zéro une fois invisible
+    const prev = slides[slideIndex];
+    prev.classList.remove("is-on");
+    setTimeout(() => { if (!prev.classList.contains("is-on")) prev.classList.remove("is-anim"); }, 1300);
     slideIndex = (slideIndex + 1) % slides.length;
-    slides[slideIndex].classList.add("is-on");
+    const next = slides[slideIndex];
+    next.classList.remove("is-anim");
+    void next.offsetWidth; // relance l'animation depuis le début
+    next.classList.add("is-anim", "is-on");
     viewerTitle.classList.add("is-changing");
     setTimeout(() => {
       viewerTitle.textContent = slideTitle(slides[slideIndex]);
