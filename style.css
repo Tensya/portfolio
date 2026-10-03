@@ -352,6 +352,9 @@ main > section, main > .marquee { position: relative; z-index: 1; }
   transition: opacity 1.2s ease, transform 5s linear;
 }
 .viewer__slide.is-on { opacity: 1; transform: scale(1.1); }
+/* une image sur deux : zoom arrière (classe ajoutée par script.js, en alternance) */
+.viewer__slide.is-out { transform: scale(1.1); }
+.viewer__slide.is-out.is-on { transform: scale(1.02); }
 .viewer__slide--zoom { background-size: auto 140%; } /* image avec bandes noires (Fire House) */
 .viewer__title {
   position: absolute;
