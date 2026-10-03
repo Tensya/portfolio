@@ -337,7 +337,6 @@ if (viewer && showreel) {
 const slides = viewer && !showreel ? [...viewer.querySelectorAll(".viewer__slide")] : [];
 const viewerTitle = document.querySelector(".viewer__title");
 let slideIndex = 0;
-let zoomOut = false; // la 1re image fait un zoom avant
 const slideTitle = (s) => (document.documentElement.lang === "en" && s.dataset.titleEn) || s.dataset.title;
 if (viewerTitle && slides[0]) viewerTitle.textContent = slideTitle(slides[0]); // 1er titre dans la bonne langue
 if (slides.length > 1 && !reduceMotion) {
@@ -345,13 +344,7 @@ if (slides.length > 1 && !reduceMotion) {
     if (document.hidden) return;
     slides[slideIndex].classList.remove("is-on");
     slideIndex = (slideIndex + 1) % slides.length;
-    zoomOut = !zoomOut; // alterne zoom avant / zoom arrière, même quand la boucle recommence
-    const next = slides[slideIndex];
-    next.style.transition = "none"; // place l'image à son point de départ sans animation
-    next.classList.toggle("is-out", zoomOut);
-    void next.offsetWidth;
-    next.style.transition = "";
-    next.classList.add("is-on");
+    slides[slideIndex].classList.add("is-on");
     viewerTitle.classList.add("is-changing");
     setTimeout(() => {
       viewerTitle.textContent = slideTitle(slides[slideIndex]);
