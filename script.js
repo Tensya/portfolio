@@ -338,6 +338,7 @@ const slides = viewer && !showreel ? [...viewer.querySelectorAll(".viewer__slide
 const viewerTitle = document.querySelector(".viewer__title");
 let slideIndex = 0;
 const slideTitle = (s) => (document.documentElement.lang === "en" && s.dataset.titleEn) || s.dataset.title;
+if (viewerTitle && slides[0]) viewerTitle.textContent = slideTitle(slides[0]); // 1er titre dans la bonne langue
 if (slides.length > 1 && !reduceMotion) {
   setInterval(() => {
     if (document.hidden) return;
